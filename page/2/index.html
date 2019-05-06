@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/osi.model/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/20/tcp.2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -345,7 +345,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/osi.model/" class="post-title-link" itemprop="url">网络协议</a>
+                <a href="/2017/09/20/tcp.2/" class="post-title-link" itemprop="url">TCP状态详解_2</a>
               
             
           </h1>
@@ -370,9 +370,562 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-09-20 21:09:02" itemprop="dateCreated datePublished" datetime="2017-09-20T21:09:02+08:00">2017-09-20</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:16:27" itemprop="dateModified" datetime="2019-05-06T15:16:27+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>TCP是一个面向连接的协议，所以在连接双方发送数据之前，都需要首先建立一条连接。这和前面讲到的协议完全不同。前面讲的所有协议都只是发送数据而已，大多数都不关心发送的数据是不是送到，UDP尤其明显，从编程的角度来说，UDP编程也要简单的多—-UDP都不用考虑数据分片。</p>
+<p>书中用telnet登陆退出来解释TCP协议连接的建立和中止的过程，可以看到，TCP连接的建立可以简单的称为三次握手，而连接的中止则可以叫做四次握手。</p>
+<ul>
+<li><p>连接的建立<br>在建立连接的时候，客户端首先向服务器申请打开某一个端口(用SYN段等于1的TCP报文)，然后服务器端发回一个ACK报文通知客户端请求报文收到，客户端收到确认报文以后再次发出确认报文确认刚才服务器端发出的确认报文（绕口么），至此，连接的建立完成。这就叫做三次握手。如果打算让双方都做好准备的话，一定要发送三次报文，而且只需要三次报文就可以了。<br>可以想见，如果再加上TCP的超时重传机制，那么TCP就完全可以保证一个数据包被送到目的地。</p>
+</li>
+<li><p>结束连接<br>TCP有一个特别的概念叫做half-close，这个概念是说，TCP的连接是全双工（可以同时发送和接收）连接，因此在关闭连接的时候，必须关闭传和送两个方向上的连接。客户机给服务器一个FIN为1的TCP报文，然后服务器返回给客户端一个确认ACK报文，并且发送一个FIN报文，当客户机回复ACK报文后（四次握手），连接就结束了。</p>
+</li>
+<li><p>最大报文长度<br>在建立连接的时候，通信的双方要互相确认对方的最大报文长度(MSS)，以便通信。一般这个SYN长度是MTU减去固定IP首部和TCP首部长度。对于一个以太网，一般可以达到1460字节。当然如果对于非本地的IP，这个MSS可能就只有536字节，而且，如果中间的传输网络的MSS更小的话，这个值还会变得更小。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/20/tcp.1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/09/20/tcp.1/" class="post-title-link" itemprop="url">TCP状态详解_1</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-20 20:01:02" itemprop="dateCreated datePublished" datetime="2017-09-20T20:01:02+08:00">2017-09-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:16:11" itemprop="dateModified" datetime="2019-05-06T15:16:11+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="linux查看tcp的状态命令"><a href="#linux查看tcp的状态命令" class="headerlink" title="linux查看tcp的状态命令"></a>linux查看tcp的状态命令</h2><hr>
+<ul>
+<li><p><code>netstat -nat</code><br>查看TCP各个状态的数量</p>
+</li>
+<li><p><code>lsof  -i:8080</code><br>可以检测到打开套接字的状况</p>
+</li>
+<li><p><code>sar -n SOCK</code><br>查看tcp创建的连接数</p>
+</li>
+<li><p><code>tcpdump -iany tcp port 9000</code><br>对tcp端口为9000的进行抓包</p>
+</li>
+</ul>
+<h2 id="tcp各个状态"><a href="#tcp各个状态" class="headerlink" title="tcp各个状态"></a>tcp各个状态</h2><hr>
+<ul>
+<li><p>LISTENING<br><em>侦听来自远方的TCP端口的连接请求.</em><br>首先服务端需要打开一个socket进行监听，状态为LISTEN。<br>有提供某种服务才会处于LISTENING状态，TCP状态变化就是某个端口的状态变化，提供一个服务就打开一个端口，例如：提供www服务默认开的是80端口，提供ftp服务默认的端口为21，当提供的服务没有被连接时就处于LISTENING状态。FTP服务启动后首先处于侦听（LISTENING）状态。处于侦听LISTENING状态时，该端口是开放的，等待连接，但还没有被连接。就像你房子的门已经敞开的，但还没有人进来。</p>
+<blockquote>
+<p>看LISTENING状态最主要的是看本机开了哪些端口，这些端口都是哪个程序开的，关闭不必要的端口是保证安全的一个非常重要的方面，服务端口都对应一个服务（应用程序），停止该服务就关闭了该端口，例如要关闭21端口只要停止IIS服务中的FTP服务即可。关于这方面的知识请参阅其它文章。<br>如果你不幸中了服务端口的木马，木马也开个端口处于LISTENING状态。</p>
+</blockquote>
+</li>
+<li><p>SYN-SENT<br><em>客户端SYN_SENT状态</em><br>再发送连接请求后等待匹配的连接请求，客户端通过应用程序调用connect进行active open。于是客户端tcp发送一个SYN以请求建立一个连接。之后状态置为SYN_SENT。在发送连接请求后等待匹配的连接请求。<br>当请求连接时客户端首先要发送同步信号给要访问的机器，此时状态为SYN_SENT，如果连接成功了就变为ESTABLISHED，正常情况下SYN_SENT状态非常短暂。例如要访问网站,如果是正常连接的话，用TCPView观察IEXPLORE.EXE（IE）建立的连接会发现很快从SYN_SENT变为ESTABLISHED，表示连接成功。SYN_SENT状态快的也许看不到。</p>
+<blockquote>
+<p>如果发现有很多SYN_SENT出现，那一般有这么几种情况，一是你要访问的网站不存在或线路不好，二是用扫描软件扫描一个网段的机器，也会出现很多SYN_SENT，另外就是可能中了病毒了，例如中了”冲击波”，病毒发作时会扫描其它机器，这样会有很多SYN_SENT出现。</p>
+</blockquote>
+</li>
+<li><p>SYN-RECEIVED<br><em>服务器端状态SYN_RCVD</em><br>在收到和发送一个连接请求后等待对方对连接请求的确认。<br>当服务器收到客户端发送的同步信号时，将标志位ACK和SYN置1发送给客户端，此时服务器端处于SYN_RCVD状态，如果连接成功了就变为ESTABLISHED，正常情况下SYN_RCVD状态非常短暂。</p>
+<blockquote>
+<p>如果发现有很多SYN_RCVD状态，那你的机器有可能被SYN Flood的DoS(拒绝服务攻击)攻击了。<br>SYN Flood的攻击原理是：<br>在进行三次握手时，攻击软件向被攻击的服务器发送SYN连接请求（握手的第一步），但是这个地址是伪造的，如攻击软件随机伪造了51.133.163.104、65.158.99.152等等地址。服务器在收到连接请求时将标志位ACK和SYN置1发送给客户端（握手的第二步），但是这些客户端的IP地址都是伪造的，服务器根本找不到客户机，也就是说握手的第三步不可能完成。<br>这种情况下服务器端一般会重试（再次发送SYN+ACK给客户端）并等待一段时间后丢弃这个未完成的连接，这段时间的长度我们称为SYN Timeout，一般来说这个时间是分钟的数量级（大约为30秒-2分钟）；一个用户出现异常导致服务器的一个线程等待1分钟并不是什么很大的问题，但如果有一个恶意的攻击者大量模拟这种情况，服务器端将为了维护一个非常大的半连接列表而消耗非常多的资源—-数以万计的半连接，即使是简单的保存并遍历也会消耗非常多的CPU时间和内存，何况还要不断对这个列表中的IP进行SYN+ACK的重试。此时从正常客户的角度看来，服务器失去响应，这种情况我们称做：服务器端受到了SYN Flood攻击（SYN洪水攻击）。</p>
+</blockquote>
+</li>
+<li><p>ESTABLISHED<br><em>代表一个打开的连接</em><br>ESTABLISHED状态是表示两台机器正在传输数据，观察这个状态最主要的就是看哪个程序正在处于ESTABLISHED状态。</p>
+<blockquote>
+<p>服务器出现很多ESTABLISHED状态： netstat -nat |grep 9502或者使用lsof -i:9502可以检测到。<br>当客户端未主动close的时候就断开连接，即客户端发送的FIN丢失或未发送。<br>这时候若客户端断开的时候发送了FIN包，则服务端将会处于CLOSE_WAIT状态；<br>这时候若客户端断开的时候未发送FIN包，则服务端处还是显示ESTABLISHED状态；<br>结果客户端重新连接服务器。<br>而新连接上来的客户端（也就是刚才断掉的重新连上来了）在服务端肯定是ESTABLISHED; 如果客户端重复的上演这种情况，那么服务端将会出现大量的假的ESTABLISHED连接和CLOSE_WAIT连接。<br>最终结果就是新的其他客户端无法连接上来，但是利用netstat还是能看到一条连接已经建立，并显示ESTABLISHED，但始终无法进入程序代码。</p>
+</blockquote>
+</li>
+<li><p>FIN-WAIT-1<br><em>等待远程TCP连接中断请求，或先前的连接中断请求的确认</em><br>主动关闭(active close)端应用程序调用close，于是其TCP发出FIN请求主动关闭连接，之后进入FIN_WAIT1状态。</p>
+<blockquote>
+<p>如果服务器出现shutdown再重启，使用netstat -nat查看，就会看到很多FIN-WAIT-1的状态。就是因为服务器当前有很多客户端连接，直接关闭服务器后，无法接收到客户端的ACK。</p>
+</blockquote>
+</li>
+<li><p>FIN-WAIT-2<br><em>从远程TCP等待连接中断请求</em><br>主动关闭端接到ACK后，就进入了FIN-WAIT-2。</p>
+<blockquote>
+<p>这就是著名的半关闭的状态了，这是在关闭连接时，客户端和服务器两次握手之后的状态。在这个状态下，应用程序还有接受数据的能力，但是已经无法发送数据，但是也有一种可能是，客户端一直处于FIN_WAIT_2状态，而服务器则一直处于WAIT_CLOSE状态，而直到应用层来决定关闭这个状态。</p>
+</blockquote>
+</li>
+<li><p>CLOSE-WAIT<br><em>等待从本地用户发来的连接中断请求</em><br>被动关闭(passive close)端TCP接到FIN后，就发出ACK以回应FIN请求(它的接收也作为文件结束符传递给上层应用程序),并进入CLOSE_WAIT。</p>
+</li>
+<li><p>CLOSING<br><em>等待远程TCP对连接中断的确认</em><br>比较少见</p>
+</li>
+<li><p>LAST-ACK<br><em>等待原来的发向远程TCP的连接中断请求的确认</em><br>被动关闭端一段时间后，接收到文件结束符的应用程序将调用CLOSE关闭连接。这导致它的TCP也发送一个FIN，等待对方的ACK.就进入了LAST-ACK。</p>
+<blockquote>
+<p>使用并发压力测试的时候，突然断开压力测试客户端，服务器会看到很多LAST-ACK。</p>
+</blockquote>
+</li>
+<li><p>TIME-WAIT<br><em>等待足够的时间以确保远程TCP接收到连接中断请求的确认</em><br>在主动关闭端接收到FIN后，TCP就发送ACK包，并进入TIME-WAIT状态。</p>
+<blockquote>
+<p>TIME_WAIT等待状态，这个状态又叫做2MSL状态，说的是在TIME_WAIT2发送了最后一个ACK数据报以后，要进入TIME_WAIT状态，这个状态是防止最后一次握手的数据报没有传送到对方那里而准备的（注意这不是四次握手，这是第四次握手的保险状态）。这个状态在很大程度上保证了双方都可以正常结束，但是，问题也来了。由于插口的2MSL状态（插口是IP和端口对的意思，socket），使得应用程序在2MSL时间内是无法再次使用同一个插口的，对于客户程序还好一些，但是对于服务程序，例如httpd，它总是要使用同一个端口来进行服务，而在2MSL时间内，启动httpd就会出现错误（插口被使用）。为了避免这个错误，服务器给出了一个平静时间的概念，这是说在2MSL时间内，虽然可以重新启动服务器，但是这个服务器还是要平静的等待2MSL时间的过去才能进行下一次连接。</p>
+</blockquote>
+</li>
+<li><p>CLOSED<br><em>没有任何连接状态</em><br>被动关闭端在接受到ACK包后，就进入了closed的状态。连接结束。</p>
+</li>
+</ul>
+<h2 id="TCP状态迁移路线图"><a href="#TCP状态迁移路线图" class="headerlink" title="TCP状态迁移路线图"></a>TCP状态迁移路线图</h2><hr>
+<p>client/server两条路线讲述TCP状态迁移路线图：<br><img src="/image/tcp_1.png" alt="tcp"><br><img src="/image/tcp_2.png" alt="tcp"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/19/msl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/09/19/msl/" class="post-title-link" itemprop="url">什么是2MSL</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-19 11:25:20" itemprop="dateCreated datePublished" datetime="2017-09-19T11:25:20+08:00">2017-09-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:15:48" itemprop="dateModified" datetime="2019-05-06T15:15:48+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>MSL是Maximum Segment Lifetime英文的缩写，中文可以译为“报文最大生存时间”，他是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。因为tcp报文（segment）是ip数据报（datagram）的数据部分，具体称谓请参见《数据在网络各层中的称呼》一文，而ip头中有一个TTL域，TTL是time to live的缩写，中文可以译为“生存时间”，这个生存时间是由源主机设置初始值但不是存的具体时间，而是存储了一个ip数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减1，当此值为0则数据报将被丢弃，同时发送ICMP报文通知源主机。RFC 793中规定MSL为2分钟，实际应用中常用的是30秒，1分钟和2分钟等。</p>
+<p>2MSL即两倍的MSL，TCP的TIME_WAIT状态也称为2MSL等待状态，当TCP的一端发起主动关闭，在发出最后一个ACK包后，即第3次握手完成后发送了第四次握手的ACK包后就进入了TIME_WAIT状态，必须在此状态上停留两倍的MSL时间，等待2MSL时间主要目的是怕最后一个ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后可以再发一个ACK应答包。在TIME_WAIT状态时两端的端口不能使用，要等到2MSL时间结束才可继续使用。当连接处于2MSL等待阶段时任何迟到的报文段都将被丢弃。不过在实际应用中可以通过设置SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。</p>
+<p>TTL与MSL是有关系的但不是简单的相等的关系，MSL要大于等于TTL。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/17/osi.model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/09/17/osi.model/" class="post-title-link" itemprop="url">网络协议</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-17 20:02:05" itemprop="dateCreated datePublished" datetime="2017-09-17T20:02:05+08:00">2017-09-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:15:28" itemprop="dateModified" datetime="2019-05-06T15:15:28+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -425,19 +978,19 @@
 <h1 id="分层详情"><a href="#分层详情" class="headerlink" title="分层详情"></a>分层详情</h1><hr>
 <p>为了使不同计算机厂家生产的计算机能够相互通信，以便在更大的范围内建立计算机网络，国际标准化组织（ISO）在1978年提出了“开放系统互联参考模型”，即著名的OSI/RM模型（Open System Interconnection/Reference Model）。它将计算机网络体系结构的通信协议划分为七层，自下而上依次为：物理层（Physics Layer）、数据链路层（Data Link Layer）、网络层（Network Layer）、传输层（Transport Layer）、会话层（Session Layer）、表示层（Presentation Layer）、应用层（Application Layer）。<br>其中第四层完成数据传送服务，上面三层面向用户。对于每一层，至少制定两项标准：服务定义和协议规范。前者给出了该层所提供的服务的准确定义，后者详细描述了该协议的动作和各种有关规程，以保证服务的提供。以下为各层详细介绍： </p>
 <ol>
-<li><p>物理层<br>规定通信设备的机械的、电气的、功能的和过程的特性，用以建立、维护和拆除物理链路连接。具体地讲，机械 特性规定了网络连接时所需接插件的规格尺寸、引脚数量和排列情况等；电气特性规定了在物理连接上传输bit流时线路上信号电平的大小、阻抗匹配、传输速率 距离限制等；功能特性是指对各个信号先分配确切的信号含义，即定义了DTE和DCE之间各个线路的功能；规程特性定义了利用信号线进行bit流传输的一组操作规程。在这一层，数据的单位称为比特（bit）。属于物理层定义的包括：以太网、调制解调器、电力线通信(PLC)、SONET/SDH、G.709、光导纤维、同轴电缆、双绞线等。</p>
+<li><p>物理层<br> 规定通信设备的机械的、电气的、功能的和过程的特性，用以建立、维护和拆除物理链路连接。具体地讲，机械 特性规定了网络连接时所需接插件的规格尺寸、引脚数量和排列情况等；电气特性规定了在物理连接上传输bit流时线路上信号电平的大小、阻抗匹配、传输速率 距离限制等；功能特性是指对各个信号先分配确切的信号含义，即定义了DTE和DCE之间各个线路的功能；规程特性定义了利用信号线进行bit流传输的一组操作规程。在这一层，数据的单位称为比特（bit）。属于物理层定义的包括：以太网、调制解调器、电力线通信(PLC)、SONET/SDH、G.709、光导纤维、同轴电缆、双绞线等。</p>
 </li>
-<li><p>数据链路层<br>在物理层提供比特流服务的基础上，建立相邻结点之间的数据链路，通过差错控制提供数据帧（Frame）在信道上无差错的传输，并进行各电路上的动作系列。数据链路层在不可靠的物理介质上提供可靠的传输。该层的作用包括：物理地址寻址、数据的成帧、流量控制、数据的检错、重发等。在这一层，数据的单位称为帧（Frame）。属于数据链路层的包括：Wi-Fi(IEEE 802.11)、WiMAX(IEEE 802.16)、ATM、DTM、令牌环、以太网、FDDI、帧中继、GPRS、EVDO、HSPA、HDLC、PPP、L2TP、PPTP、ISDN、STP等。</p>
+<li><p>数据链路层<br> 在物理层提供比特流服务的基础上，建立相邻结点之间的数据链路，通过差错控制提供数据帧（Frame）在信道上无差错的传输，并进行各电路上的动作系列。数据链路层在不可靠的物理介质上提供可靠的传输。该层的作用包括：物理地址寻址、数据的成帧、流量控制、数据的检错、重发等。在这一层，数据的单位称为帧（Frame）。属于数据链路层的包括：Wi-Fi(IEEE 802.11)、WiMAX(IEEE 802.16)、ATM、DTM、令牌环、以太网、FDDI、帧中继、GPRS、EVDO、HSPA、HDLC、PPP、L2TP、PPTP、ISDN、STP等。</p>
 </li>
-<li><p>网络层<br>在计算机网络中进行通信的两个计算机之间可能会经过很多个数据链路，也可能还要经过很多通信子网。网络层的任务就是选择合适的网间路由和交换结点， 确保数据及时传送。网络层将数据链路层提供的帧组成数据包，包中封装有网络层包头，其中含有逻辑地址信息–源站点和目的站点地址的网络地址。如果你在谈论一个IP地址，那么你是在处理第三层的问题，这是“数据包”问题，而不是第二层的“帧”。IP是第三层问题的一部分，此外还有一些路由协议和地址解析协议（ARP）。有关路由的一切事情都在这第三层处理。地址解析和路由是三层的重要目的。网络层还可以实现拥塞控制、网际互连等功能。在这一层，数据的单位称为数据包（packet）。网络层的协议包括：IP(IPv4、IPv6)、ICMP、ICMPv6、IGMP、IS-IS、IPsec、ARP、RARP等。</p>
+<li><p>网络层<br> 在计算机网络中进行通信的两个计算机之间可能会经过很多个数据链路，也可能还要经过很多通信子网。网络层的任务就是选择合适的网间路由和交换结点， 确保数据及时传送。网络层将数据链路层提供的帧组成数据包，包中封装有网络层包头，其中含有逻辑地址信息–源站点和目的站点地址的网络地址。如果你在谈论一个IP地址，那么你是在处理第三层的问题，这是“数据包”问题，而不是第二层的“帧”。IP是第三层问题的一部分，此外还有一些路由协议和地址解析协议（ARP）。有关路由的一切事情都在这第三层处理。地址解析和路由是三层的重要目的。网络层还可以实现拥塞控制、网际互连等功能。在这一层，数据的单位称为数据包（packet）。网络层的协议包括：IP(IPv4、IPv6)、ICMP、ICMPv6、IGMP、IS-IS、IPsec、ARP、RARP等。</p>
 </li>
-<li><p>传输层<br>第4层的数据单元也称作数据包（packets）。但是，当你谈论TCP等具体的协议时又有特殊的叫法，TCP的数据单元称为段 （segments）而UDP协议的数据单元称为“数据报（datagrams）”。这个层负责获取全部信息，因此，它必须跟踪数据单元碎片、乱序到达的 数据包和其它在传输过程中可能发生的危险。第4层为上层提供端到端（最终用户到最终用户）的透明的、可靠的数据传输服务。所为透明的传输是指在通信过程中 传输层对上层屏蔽了通信传输系统的具体细节。传输层的协议包括：TCP、UDP、TLS、DCCP、SCTP、RSVP、OSPF等。</p>
+<li><p>传输层<br> 第4层的数据单元也称作数据包（packets）。但是，当你谈论TCP等具体的协议时又有特殊的叫法，TCP的数据单元称为段 （segments）而UDP协议的数据单元称为“数据报（datagrams）”。这个层负责获取全部信息，因此，它必须跟踪数据单元碎片、乱序到达的 数据包和其它在传输过程中可能发生的危险。第4层为上层提供端到端（最终用户到最终用户）的透明的、可靠的数据传输服务。所为透明的传输是指在通信过程中 传输层对上层屏蔽了通信传输系统的具体细节。传输层的协议包括：TCP、UDP、TLS、DCCP、SCTP、RSVP、OSPF等。</p>
 </li>
-<li><p>会话层<br>这一层也可以称为会晤层或对话层，在会话层及以上的高层次中，数据传送的单位不再另外命名，而是统称为报文。会话层不参与具体的传输，它提供包括访问验证和会话管理在内的建立和维护应用之间通信的机制。如服务器验证用户登录便是由会话层完成的。</p>
+<li><p>会话层<br> 这一层也可以称为会晤层或对话层，在会话层及以上的高层次中，数据传送的单位不再另外命名，而是统称为报文。会话层不参与具体的传输，它提供包括访问验证和会话管理在内的建立和维护应用之间通信的机制。如服务器验证用户登录便是由会话层完成的。</p>
 </li>
-<li><p>表示层<br>这一层主要解决拥护信息的语法表示问题。它将欲交换的数据从适合于某一用户的抽象语法，转换为适合于OSI系统内部使用的传送语法。即提供格式化的表示和转换数据服务。数据的压缩和解压缩， 加密和解密等工作都由表示层负责。</p>
+<li><p>表示层<br> 这一层主要解决拥护信息的语法表示问题。它将欲交换的数据从适合于某一用户的抽象语法，转换为适合于OSI系统内部使用的传送语法。即提供格式化的表示和转换数据服务。数据的压缩和解压缩， 加密和解密等工作都由表示层负责。</p>
 </li>
-<li><p>应用层<br>应用层为操作系统或网络应用程序提供访问网络服务的接口。应用层的协议包括：<br>DHCP、DNS、FTP、Gopher、HTTP、IMAP4、IRC、NNTP、XMPP、POP3、SIP、SMTP、SNMP、SSH、TELNET、RPC、RTCP、RTP、RTSP、SDP、SOAP、GTP、STUN、NTP、SSDP、BGP、RIP等。</p>
+<li><p>应用层<br> 应用层为操作系统或网络应用程序提供访问网络服务的接口。应用层的协议包括：<br> DHCP、DNS、FTP、Gopher、HTTP、IMAP4、IRC、NNTP、XMPP、POP3、SIP、SMTP、SNMP、SSH、TELNET、RPC、RTCP、RTP、RTSP、SDP、SOAP、GTP、STUN、NTP、SSDP、BGP、RIP等。</p>
 </li>
 </ol>
 <h1 id="概念及原理"><a href="#概念及原理" class="headerlink" title="概念及原理"></a>概念及原理</h1><hr>
@@ -454,11 +1007,11 @@
 </li>
 <li><p>Socket连接<br>由于通常情况下Socket连接就是TCP连接，因此Socket连接一旦建立，通信双方即可开始相互发送数据内容，直到双方连接断开。但在实际网络应用中，客户端到服务器之间的通信往往需要穿越多个中间节点，例如路由器、网关、防火墙等，大部分防火墙默认会关闭长时间处于非活跃状态的连接而导致 Socket连接断连，因此需要通过轮询告诉网络，该连接处于活跃状态。<br>建立Socket连接至少需要一对套接字，其中一个运行于客户端，称为ClientSocket ，另一个运行于服务器端，称为ServerSocket。<br>套接字之间的连接过程分为三个步骤：服务器监听，客户端请求，连接确认。 </p>
 <ol>
-<li><p>服务器监听<br>服务器端套接字并不定位具体的客户端套接字，而是处于等待连接的状态，实时监控网络状态，等待客户端的连接请求。</p>
+<li><p>服务器监听<br> 服务器端套接字并不定位具体的客户端套接字，而是处于等待连接的状态，实时监控网络状态，等待客户端的连接请求。</p>
 </li>
-<li><p>客户端请求<br>指客户端的套接字提出连接请求，要连接的目标是服务器端的套接字。为此，客户端的套接字必须首先描述它要连接的服务器的套接字，指出服务器端套接字的地址和端口号，然后就向服务器端套接字提出连接请求。 </p>
+<li><p>客户端请求<br> 指客户端的套接字提出连接请求，要连接的目标是服务器端的套接字。为此，客户端的套接字必须首先描述它要连接的服务器的套接字，指出服务器端套接字的地址和端口号，然后就向服务器端套接字提出连接请求。 </p>
 </li>
-<li><p>连接确认<br>当服务器端套接字监听到或者说接收到客户端套接字的连接请求时，就响应客户端套接字的请求，建立一个新的线程，把服务器端套接字的描述发给客户端，一旦客户端确认了此描述，双方就正式建立连接。而服务器端套接字继续处于监听状态，继续接收其他客户端套接字的连接请求。</p>
+<li><p>连接确认<br> 当服务器端套接字监听到或者说接收到客户端套接字的连接请求时，就响应客户端套接字的请求，建立一个新的线程，把服务器端套接字的描述发给客户端，一旦客户端确认了此描述，双方就正式建立连接。而服务器端套接字继续处于监听状态，继续接收其他客户端套接字的连接请求。</p>
 </li>
 </ol>
 </li>
@@ -523,7 +1076,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/nohup/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/16/proxy.reverse/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -543,7 +1096,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/nohup/" class="post-title-link" itemprop="url">后台运行</a>
+                <a href="/2017/09/16/proxy.reverse/" class="post-title-link" itemprop="url">正向代理和反向代理的理解</a>
               
             
           </h1>
@@ -568,9 +1121,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-09-16 19:58:00" itemprop="dateCreated datePublished" datetime="2017-09-16T19:58:00+08:00">2017-09-16</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:15:01" itemprop="dateModified" datetime="2019-05-06T15:15:01+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -605,15 +1174,12 @@
       
         
           
-            <ul>
-<li><p><code>$ java -jar xx.jar</code><br>当前ssh窗口被锁定，可按CTRL + C打断程序运行，或直接关闭窗口，程序退出。  </p>
-</li>
-<li><p><code>$ java -jar xx.jar &amp;</code><br>窗口不锁定，&amp;代表在后台运行,当前ssh窗口不被锁定，但是当窗口关闭时，程序中止运行。  </p>
-</li>
-<li><p><code>$ nohup java -jar xx.jar &amp;</code><br>窗口不锁定，窗口关闭时，程序仍然运行，nohup意思是不挂断运行命令,当账户退出或终端关闭时,程序仍然运行。<br>当用nohup命令执行作业时，缺省情况下该作业的所有输出被重定向到nohup.out的文件中，除非另外指定了输出文件。<br><code>$ nohup java -jar xx.jar &gt; temp.log &amp;</code></p>
-</li>
-</ul>
-<p>可通过<code>jobs</code>命令查看后台运行任务，执行<code>jobs</code>命令后，就会列出所有后台执行的作业，并且每个作业前面都有个编号。<br>如果想将某个作业调回前台控制，只需要fg + 编号即可。</p>
+            <h1 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h1><hr>
+<p>我们常说的代理也就是只正向代理，正向代理的过程，它隐藏了真实的请求客户端，服务端不知道真实的客户端是谁，客户端请求的服务都被代理服务器代替来请求，某些科学上网工具扮演的就是典型的正向代理角色。用浏览器访问<a href="http://www.google.com" target="_blank" rel="noopener">http://www.google.com</a>时，被残忍的block，于是你可以在国外搭建一台代理服务器，让代理帮我去请求google.com，代理把请求返回的相应结构再返回给我。<br><img src="/image/proxy.jpg" alt="正向代理"></p>
+<h1 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h1><hr>
+<p>反向代理隐藏了真实的服务端，当我们请求<a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a>的时候，就像拨打10086一样，背后可能有成千上万台服务器为我们服务，但具体是哪一台，你不知道，也不需要知道，你只需要知道反向代理服务器是谁就好了，<a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a>就是我们的反向代理服务器，反向代理服务器会帮我们把请求转发到真实的服务器那里去。Nginx就是性能非常好的反向代理服务器，用来做负载均衡。<br><img src="/image/reverse_proxy.jpg" alt="反向代理"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><hr>
+<p>两者的区别在于代理的对象不一样：正向代理代理的对象是客户端，反向代理代理的对象是服务端。</p>
 
           
         
@@ -670,7 +1236,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/node.npm/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/16/nginx.domain/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -690,7 +1256,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/node.npm/" class="post-title-link" itemprop="url">npm更换源</a>
+                <a href="/2017/09/16/nginx.domain/" class="post-title-link" itemprop="url">用nginx的反向代理机制解决前端跨域问题</a>
               
             
           </h1>
@@ -715,311 +1281,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-09-16 19:52:02" itemprop="dateCreated datePublished" datetime="2017-09-16T19:52:02+08:00">2017-09-16</time>
             
 
             
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>有很多方法来配置npm的registry地址，下面根据不同情境列出几种比较常用的方法。<br>以淘宝npm 镜像举例： </p>
-<ol>
-<li><p>临时使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm --registry https://registry.npm.taobao.org install express</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>持久使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>配置后可通过下面方式来验证是否成功<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config get registry</span><br></pre></td></tr></table></figure></p>
-<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm info express</span><br></pre></td></tr></table></figure></p>
-<ol start="3">
-<li>通过cnpm使用，这也是我自己常使用的 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><a href="http://www.jianshu.com/p/0deb70e6f395" target="_blank" rel="noopener">http://www.jianshu.com/p/0deb70e6f395</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/nginx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/05/nginx/" class="post-title-link" itemprop="url">nginx相关的一些命令</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
 
               
                 
-              
-
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>检查nginx的配置<br><code>$ nginx -t</code>  </p>
-</li>
-<li><p>启动nginx<br><code>$ nginx  -c /usr/local/nginx/conf/nginx.conf</code><br><strong>conf位置得自己找找</strong>  </p>
-</li>
-<li><p>重启nginx<br><code>$ nginx  -s reload</code>  </p>
-</li>
-<li><p>启动cgi<br><code>$ spawn-fcgi -a 127.0.0.1 -p 9002 -C 25 -f /home/zhengdongtian/CLionProjects/Bump/cmake-build-debug/Bump</code><br><strong>9002是对应的conf中的端口</strong></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/nginx.domain/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+                <span class="post-meta-divider">|</span>
                 
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
                 
-                <a href="/2019/05/05/nginx.domain/" class="post-title-link" itemprop="url">用nginx的反向代理机制解决前端跨域问题</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
+                  <span class="post-meta-item-text">更新于</span>
                 
+                <time title="修改时间：2019-05-06 15:14:38" itemprop="dateModified" datetime="2019-05-06T15:14:38+08:00">2019-05-06</time>
               
-
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
-            
-
             
           </span>
 
@@ -1191,7 +1471,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/nginx.conf.domain/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/15/linux.umask/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -1211,7 +1491,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/nginx.conf.domain/" class="post-title-link" itemprop="url">修改nginx配置文件允许跨域访问</a>
+                <a href="/2017/09/15/linux.umask/" class="post-title-link" itemprop="url">linux创建目录或文件的默认权限</a>
               
             
           </h1>
@@ -1236,9 +1516,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-09-15 17:02:05" itemprop="dateCreated datePublished" datetime="2017-09-15T17:02:05+08:00">2017-09-15</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:14:04" itemprop="dateModified" datetime="2019-05-06T15:14:04+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -1273,7 +1569,63 @@
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">	if ($request_method = &apos;OPTIONS&apos;) &#123;</span><br><span class="line">		add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</span><br><span class="line">		add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</span><br><span class="line">		#</span><br><span class="line">		# Custom headers and headers various browsers *should* be OK with but aren&apos;t</span><br><span class="line">		#</span><br><span class="line">		add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&apos;;</span><br><span class="line">		#</span><br><span class="line">		# Tell client that this pre-flight info is valid for 20 days</span><br><span class="line">		#</span><br><span class="line">		add_header &apos;Access-Control-Max-Age&apos; 1728000;</span><br><span class="line">		add_header &apos;Content-Type&apos; &apos;text/plain charset=UTF-8&apos;;</span><br><span class="line">		add_header &apos;Content-Length&apos; 0;</span><br><span class="line">		return 204;</span><br><span class="line">	&#125;</span><br><span class="line">	if ($request_method = &apos;POST&apos;) &#123;</span><br><span class="line">		add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</span><br><span class="line">		add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</span><br><span class="line">		add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&apos;;</span><br><span class="line">	&#125;</span><br><span class="line">	if ($request_method = &apos;GET&apos;) &#123;</span><br><span class="line">		add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</span><br><span class="line">		add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</span><br><span class="line">		add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&apos;;</span><br><span class="line">	&#125;</span><br><span class="line">	root   /home/data;</span><br><span class="line">	index  index.html index.htm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h2 id="我们创建文件的默认权限是怎么来的？"><a href="#我们创建文件的默认权限是怎么来的？" class="headerlink" title="我们创建文件的默认权限是怎么来的？"></a>我们创建文件的默认权限是怎么来的？</h2><p>当我们登录系统之后创建一个文件总是有一个默认权限的，那么这个权限是怎么来的呢？这就是umask干的事情。umask设置了用户创建文件的默认权限，它与chmod的效果刚好相反，umask设置的是权限“补码”，而chmod设置的是文件权限码。</p>
+<h2 id="如何改变这个默认权限呢？"><a href="#如何改变这个默认权限呢？" class="headerlink" title="如何改变这个默认权限呢？ "></a>如何改变这个默认权限呢？ </h2><p>一般在/etc/profile、$ [HOME]/.bash_profile或$[HOME]/.profile中设置umask值。</p>
+<h2 id="如何计算umask值？"><a href="#如何计算umask值？" class="headerlink" title="如何计算umask值？"></a>如何计算umask值？</h2><p>umask命令允许你设定文件创建时的缺省模式，对应每一类用户(文件属主、同组用户、其他用户)存在一个相应的umask值中的数字。对于文件来说，这一数字的最大值分别是6。系统不允许你在创建一个文本文件时就赋予它执行权限，必须在创建后用chmod命令增加这一权限。目录则允许设置执行权限，这样针对目录来说，umask中各个数字最大可以到7。</p>
+<p>该命令的一般形式为：umask nnn<br>其中nnn为umask置000 - 777</p>
+<p>我们只要记住umask是从权限中“拿走”相应的位即可。下表是umask值与权限的对照表：</p>
+<table>
+<thead>
+<tr>
+<th>umask</th>
+<th>file</th>
+<th>dir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<td>1</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>7</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>如：umask值为022，则默认目录权限为755，默认文件权限为644。</p>
 
           
         
@@ -1330,7 +1682,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/msl/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/15/io.multiplexing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -1350,7 +1702,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/msl/" class="post-title-link" itemprop="url">什么是2MSL</a>
+                <a href="/2017/09/15/io.multiplexing/" class="post-title-link" itemprop="url">IO多路复用是什么意思</a>
               
             
           </h1>
@@ -1375,9 +1727,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-09-15 15:06:25" itemprop="dateCreated datePublished" datetime="2017-09-15T15:06:25+08:00">2017-09-15</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:13:48" itemprop="dateModified" datetime="2019-05-06T15:13:48+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -1412,306 +1780,17 @@
       
         
           
-            <p>MSL是Maximum Segment Lifetime英文的缩写，中文可以译为“报文最大生存时间”，他是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。因为tcp报文（segment）是ip数据报（datagram）的数据部分，具体称谓请参见《数据在网络各层中的称呼》一文，而ip头中有一个TTL域，TTL是time to live的缩写，中文可以译为“生存时间”，这个生存时间是由源主机设置初始值但不是存的具体时间，而是存储了一个ip数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减1，当此值为0则数据报将被丢弃，同时发送ICMP报文通知源主机。RFC 793中规定MSL为2分钟，实际应用中常用的是30秒，1分钟和2分钟等。</p>
-<p>2MSL即两倍的MSL，TCP的TIME_WAIT状态也称为2MSL等待状态，当TCP的一端发起主动关闭，在发出最后一个ACK包后，即第3次握手完成后发送了第四次握手的ACK包后就进入了TIME_WAIT状态，必须在此状态上停留两倍的MSL时间，等待2MSL时间主要目的是怕最后一个ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后可以再发一个ACK应答包。在TIME_WAIT状态时两端的端口不能使用，要等到2MSL时间结束才可继续使用。当连接处于2MSL等待阶段时任何迟到的报文段都将被丢弃。不过在实际应用中可以通过设置SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。</p>
-<p>TTL与MSL是有关系的但不是简单的相等的关系，MSL要大于等于TTL。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/mount.ftp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/05/mount.ftp/" class="post-title-link" itemprop="url">centos挂载ftp目录</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>安装<code>rpmforge-releae</code><br>去<a href="http://www.rpm-find.net/linux/rpm2html/search.php?query=rpmforge-release(x86-64" target="_blank" rel="noopener">某个地址</a>)下载<code>rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm</code>，然后执行命令<code>rpm -Uhv rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm</code>  </p>
-</li>
-<li><p>安装<code>curlftpfs</code><br><code>$ yum install curlftpfs</code>  </p>
-</li>
-<li><p>挂载<br>将挂载后的地址先创建好，例：  </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p /mod/t639/gmf</span><br><span class="line">$ curlftpfs -o rw,allow_other ftp://nwpdata:123456@10.20.49.99/mod/t639/gmf /mod/t639/gmf</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>卸载<br><code>$ fusermount -u /mod/t639/gmf</code></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/local.repo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/05/local.repo/" class="post-title-link" itemprop="url">创建本地yum源</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在没有网络，但是拥有系统光盘或者系统u盘的情况下，可以创建本地yum源来安装一些软件。</p>
-<p>以centos为例： </p>
+            <p>假设你是一个机场的空管， 你需要管理到你机场的所有的航线， 包括进港，出港， 有些航班需要放到停机坪等待，有些航班需要去登机口接乘客。<br>你会怎么做?<br>最简单的做法，就是你去招一大批空管员，然后每人盯一架飞机， 从进港，接客，排位，出港，航线监控，直至交接给下一个空港，全程监控。<br>那么问题就来了：</p>
 <ul>
-<li>挂载光盘或u盘  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p /yum/system</span><br><span class="line">$ mount  /dev/hdc  /yum/system</span><br></pre></td></tr></table></figure>
-</li>
+<li>很快你就发现空管塔里面聚集起来一大票的空管员，交通稍微繁忙一点，新的空管员就已经挤不进来了。</li>
+<li>空管员之间需要协调，屋子里面就1, 2个人的时候还好，几十号人以后 ，基本上就成菜市场了。</li>
+<li>空管员经常需要更新一些公用的东西，比如起飞显示屏，比如下一个小时后的出港排期，最后你会很惊奇的发现，每个人的时间最后都花在了抢这些资源上。 </li>
 </ul>
-<p><strong>上面的<code>/dev/hdc</code>是插入光盘或者u盘后的路径，通过<code>disk -l</code>查看</strong>  </p>
-<ul>
-<li>创建local.repo，并添加内容，相关内容如下  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/yum.repos.d/local.repo</span><br><span class="line">[base] </span><br><span class="line">name=<span class="built_in">local</span></span><br><span class="line">baseurl=file:///yum/system</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure></li>
-</ul>
+<p>现实上我们的空管同时管几十架飞机稀松平常的事情， 他们怎么做的呢？<br>他们用这个东西<br><img src="/image/io_multiplexing.jpg" alt="空管"><br>这个东西叫flight progress strip.每一个块代表一个航班，不同的槽代表不同的状态，然后一个空管员可以管理一组这样的块（一组航班），而他的工作，就是在航班信息有新的更新的时候，把对应的块放到不同的槽子里面。<br>这个东西现在还没有淘汰哦，只是变成电子的了而已。<br>是不是觉得一下子效率高了很多，一个空管塔里可以调度的航线可以是前一种方法的几倍到几十倍。<br>如果你把每一个航线当成一个Sock(I/O 流), 空管当成你的服务端Sock管理代码的话.<br><strong>第一种方法就是最传统的多进程并发模型 (每进来一个新的I/O流会分配一个新的进程管理。)</strong><br><strong>第二种方法就是I/O多路复用 (单个线程，通过记录跟踪每个I/O流(sock)的状态，来同时管理多个I/O流。)</strong></p>
+<p>其实“I/O多路复用”这个坑爹翻译可能是这个概念在中文里面如此难理解的原因。所谓的I/O多路复用在英文中其实叫 I/O multiplexing. 如果你搜索multiplexing啥意思，基本上都会出这个图：<br><img src="/image/io_multiplexing_1.png" alt="io multiplexing"><br>于是大部分人都直接联想到”一根网线，多个sock复用”这个概念，其实不管你用多进程还是I/O多路复用，网线都只有一根好伐。多个Sock复用一根网线这个功能是在内核＋驱动层实现的。</p>
+<p><strong>重要的事情再说一遍： I/O multiplexing 这里面的 multiplexing 指的其实是在单个线程通过记录跟踪每一个Sock(I/O流)的状态(对应空管塔里面的Fight progress strip槽)来同时管理多个I/O流.</strong>发明它的原因，是尽量多的提高服务器的吞吐能力。</p>
+<p>是不是听起来好拗口，看个图就懂了.<br><img src="/image/io_multiplexing_2.jpg" alt="io multiplexing"><br>在同一个线程里面， 通过拨开关的方式，来同时传输多个I/O流， (学过EE的人现在可以站出来义正严辞说这个叫“时分复用”了）。</p>
+<p>什么，你还没有搞懂“一个请求到来了，nginx使用epoll接收请求的过程是怎样的”， 多看看这个图就了解了。提醒下，ngnix会有很多链接进来， epoll会把他们都监视起来，然后像拨开关一样，谁有数据就拨向谁，然后调用相应的代码处理。</p>
 
           
         
@@ -1768,7 +1847,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/linux.windows.ip/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/14/linux.modify.time/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -1788,7 +1867,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/linux.windows.ip/" class="post-title-link" itemprop="url">windows或者linux查看本机的公网ip</a>
+                <a href="/2017/09/14/linux.modify.time/" class="post-title-link" itemprop="url">修改系统时间</a>
               
             
           </h1>
@@ -1813,9 +1892,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-09-14 12:00:25" itemprop="dateCreated datePublished" datetime="2017-09-14T12:00:25+08:00">2017-09-14</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:13:21" itemprop="dateModified" datetime="2019-05-06T15:13:21+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -1850,11 +1945,179 @@
       
         
           
-            <ul>
-<li>windows<br><a href="http://www.net.cn/static/customercare/yourip.asp" target="_blank" rel="noopener">http://www.net.cn/static/customercare/yourip.asp</a></li>
-<li>linux<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl members.3322.org/dyndns/getip</span><br></pre></td></tr></table></figure>
+            <ol>
+<li><p>修改时区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>看看时间是否正确若不正确就按如下操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ date &#123;查看目前本地的时间&#125;</span><br><span class="line">$ hwclock --show &#123;查看硬件的时间&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果硬件时间和系统时间不同，那就对硬件的时间进行修改</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="comment">#设置硬件时间为17年4月17日14点44分15秒</span></span><br><span class="line">$ hwclock --<span class="built_in">set</span> --date <span class="string">'2017-04-17 14:44:15'</span></span><br><span class="line">$ <span class="comment">#设置系统时间和硬件时间同步</span></span><br><span class="line">$ hwclock --hctosys</span><br><span class="line">$ <span class="comment">#保存时钟</span></span><br><span class="line">$ clock -w</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/14/c.type/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/09/14/c.type/" class="post-title-link" itemprop="url">short与long是限定符，不是基本数据类型</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-14 11:00:05" itemprop="dateCreated datePublished" datetime="2017-09-14T11:00:05+08:00">2017-09-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:12:56" itemprop="dateModified" datetime="2019-05-06T15:12:56+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>c语言只提供了几种基本数据类型</p>
+<ul>
+<li>char</li>
+<li>int</li>
+<li>float</li>
+<li>double</li>
 </ul>
+<p>而short，long为限定符，用来限定整型,<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">short</span> <span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">int</span> b;</span><br></pre></td></tr></table></figure></p>
+<p>我们平常只是出于习惯把int给省略了。</p>
 
           
         
@@ -1944,7 +2207,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

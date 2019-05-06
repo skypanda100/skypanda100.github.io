@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/docker.php.nginx.postgresql/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/08/directory.tar/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -345,7 +345,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/docker.php.nginx.postgresql/" class="post-title-link" itemprop="url">docker + php + nginx + postgresql</a>
+                <a href="/2017/06/08/directory.tar/" class="post-title-link" itemprop="url">查找对应目录进行压缩</a>
               
             
           </h1>
@@ -370,159 +370,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-06-08 11:22:14" itemprop="dateCreated datePublished" datetime="2017-06-08T11:22:14+08:00">2017-06-08</time>
             
 
             
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>启动容器  </p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name gg.php -p 2120:2120 -p 2121:2121 -p 2123:2123 -d \</span><br><span class="line">-v /volume1/homes/ggzdttt/app/php:/var/www/html \</span><br><span class="line">php:7.1-fpm</span><br></pre></td></tr></table></figure>
-<p> 如果步骤2和3都成功后执行下面的命令(记得将时间更改为北京时) </p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it gg.php /bin/bash</span><br><span class="line">$ cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">$ php /var/www/html/gzt/server/other/serial/realtime/start.php start -d</span><br><span class="line">$ <span class="built_in">exit</span></span><br><span class="line"></span><br><span class="line">$ docker run --name gg.nginx -p 8765:80 -d \</span><br><span class="line">-v /volume1/homes/ggzdttt/app/php:/usr/share/nginx/html \</span><br><span class="line">-v /volume1/homes/ggzdttt/nginx/conf.d:/etc/nginx/conf.d \</span><br><span class="line">--link gg.php:php \</span><br><span class="line">nginx</span><br><span class="line"></span><br><span class="line">$ docker <span class="built_in">exec</span> -it gg.nginx /bin/bash</span><br><span class="line">$ cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">$ <span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装php关于postgresql数据库的依赖  </p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it gg.php /bin/bash</span><br><span class="line">$ apt-get update</span><br><span class="line">$ apt-get install -y libpq-dev</span><br><span class="line">$ /usr/<span class="built_in">local</span>/bin/docker-php-ext-configure pgsql</span><br><span class="line">$ /usr/<span class="built_in">local</span>/bin/docker-php-ext-install pgsql</span><br><span class="line">$ <span class="built_in">exit</span></span><br><span class="line">$ docker restart gg.php</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装workerman依赖  </p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it gg.php /bin/bash</span><br><span class="line">$ apt-get install -y wget</span><br><span class="line">$ <span class="comment">#执行`php -v`确定php版本，然后到http://php.net/releases/查找相应版本的php</span></span><br><span class="line">$ wget http://php.net/distributions/php-7.1.4.tar.gz</span><br><span class="line">$ tar zxvf php-7.1.4.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> php-7.1.4/ext/pcntl/</span><br><span class="line">$ phpize</span><br><span class="line">$ ./configure</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br><span class="line">$ <span class="comment">#通过运行 php --ini查找php.ini文件位置，然后在文件中添加extension=pcntl.so</span></span><br><span class="line">$ apt-get install -y vim</span><br><span class="line">$ vim /usr/<span class="built_in">local</span>/etc/php/conf.d/docker-php-ext-pcntl.ini</span><br><span class="line">$ <span class="comment">#在文件中添加extension=pcntl.so，最后保存退出</span></span><br><span class="line">$ php /var/www/html/gzt/server/other/serial/realtime/start.php start -d</span><br><span class="line">$ <span class="built_in">exit</span></span><br><span class="line">$ docker restart gg.php</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/directory.tar/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/05/directory.tar/" class="post-title-link" itemprop="url">查找对应目录进行压缩</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
 
               
                 
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:08:35" itemprop="dateModified" datetime="2019-05-06T15:08:35+08:00">2019-05-06</time>
               
-
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
-            
-
             
           </span>
 
@@ -614,7 +480,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/centos.yum/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/01/uptime/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -634,7 +500,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/centos.yum/" class="post-title-link" itemprop="url">更换centos的yum源</a>
+                <a href="/2017/06/01/uptime/" class="post-title-link" itemprop="url">查看系统开机时间</a>
               
             
           </h1>
@@ -659,9 +525,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-06-01 09:05:12" itemprop="dateCreated datePublished" datetime="2017-06-01T09:05:12+08:00">2017-06-01</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:07:55" itemprop="dateModified" datetime="2019-05-06T15:07:55+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -696,313 +578,12 @@
       
         
           
-            <p><strong>网上给出的将centos的yum源替换为阿里云源，目前不能用了，所以贴出下面源配置</strong></p>
-<h1 id="centos5"><a href="#centos5" class="headerlink" title="centos5"></a>centos5</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"># CentOS-Base.repo</span><br><span class="line">#</span><br><span class="line"># The mirror system uses the connecting IP address of the client and the</span><br><span class="line"># update status of each mirror to pick mirrors that are updated to and</span><br><span class="line"># geographically close to the client.  You should use this for CentOS updates</span><br><span class="line"># unless you are manually picking other mirrors.</span><br><span class="line">#</span><br><span class="line"># If the mirrorlist= does not work for you, as a fall back you can try the</span><br><span class="line"># remarked out baseurl= line instead.</span><br><span class="line">#</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">[base]</span><br><span class="line">name=CentOS-$releasever - Base - mirrors.ustc.edu.cn</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/os/$basearch/</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=os</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-5</span><br><span class="line"></span><br><span class="line">#released updates</span><br><span class="line">[updates]</span><br><span class="line">name=CentOS-$releasever - Updates - mirrors.ustc.edu.cn</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/updates/$basearch/</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=updates</span><br><span class="line">gpgcheck=</span><br><span class="line">gpgkey=https://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-5</span><br><span class="line"></span><br><span class="line">#additional packages that may be useful</span><br><span class="line">[extras]</span><br><span class="line">name=CentOS-$releasever - Extras - mirrors.ustc.edu.cn</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/extras/$basearch/</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=extras</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-5</span><br><span class="line"></span><br><span class="line">#packages used/produced in the build but not released</span><br><span class="line">[addons]</span><br><span class="line">name=CentOS-$releasever - Addons - mirrors.ustc.edu.cn</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/addons/$basearch/</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=addons</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5</span><br><span class="line"></span><br><span class="line">#additional packages that extend functionality of existing packages</span><br><span class="line">[centosplus]</span><br><span class="line">name=CentOS-$releasever - Plus - mirrors.ustc.edu.cn</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/centosplus/$basearch/</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=centosplus</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=https://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-5</span><br><span class="line"></span><br><span class="line">#contrib - packages by Centos Users</span><br><span class="line">[contrib]</span><br><span class="line">name=CentOS-$releasever - Contrib - mirrors.ustc.edu.cn</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/contrib/$basearch/</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=contrib</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=https://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-5</span><br></pre></td></tr></table></figure>
-<h1 id="centos6"><a href="#centos6" class="headerlink" title="centos6"></a>centos6</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"># CentOS-Base.repo</span><br><span class="line">#</span><br><span class="line"># The mirror system uses the connecting IP address of the client and the</span><br><span class="line"># update status of each mirror to pick mirrors that are updated to and</span><br><span class="line"># geographically close to the client.  You should use this for CentOS updates</span><br><span class="line"># unless you are manually picking other mirrors.</span><br><span class="line">#</span><br><span class="line"># If the mirrorlist= does not work for you, as a fall back you can try the</span><br><span class="line"># remarked out baseurl= line instead.</span><br><span class="line">#</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">[base]</span><br><span class="line">name=CentOS-$releasever - Base - mirrors.ustc.edu.cn</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/os/$basearch/</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=os</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6</span><br><span class="line"></span><br><span class="line">#released updates</span><br><span class="line">[updates]</span><br><span class="line">name=CentOS-$releasever - Updates - mirrors.ustc.edu.cn</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/updates/$basearch/</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=updates</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6</span><br><span class="line"></span><br><span class="line">#additional packages that may be useful</span><br><span class="line">[extras]</span><br><span class="line">name=CentOS-$releasever - Extras - mirrors.ustc.edu.cn</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/extras/$basearch/</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=extras</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6</span><br><span class="line"></span><br><span class="line">#additional packages that extend functionality of existing packages</span><br><span class="line">[centosplus]</span><br><span class="line">name=CentOS-$releasever - Plus - mirrors.ustc.edu.cn</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/centosplus/$basearch/</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=centosplus</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=https://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6</span><br><span class="line"></span><br><span class="line">#contrib - packages by Centos Users</span><br><span class="line">[contrib]</span><br><span class="line">name=CentOS-$releasever - Contrib - mirrors.ustc.edu.cn</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/contrib/$basearch/</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=contrib</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=https://mirrors.ustc.edu.cn/centos/RPM-GPG-KEY-CentOS-6</span><br></pre></td></tr></table></figure>
-<h1 id="centos7"><a href="#centos7" class="headerlink" title="centos7"></a>centos7</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"># CentOS-Base.repo</span><br><span class="line">#</span><br><span class="line"># The mirror system uses the connecting IP address of the client and the</span><br><span class="line"># update status of each mirror to pick mirrors that are updated to and</span><br><span class="line"># geographically close to the client.  You should use this for CentOS updates</span><br><span class="line"># unless you are manually picking other mirrors.</span><br><span class="line">#</span><br><span class="line"># If the mirrorlist= does not work for you, as a fall back you can try the</span><br><span class="line"># remarked out baseurl= line instead.</span><br><span class="line">#</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">[base]</span><br><span class="line">name=CentOS-$releasever - Base</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=os</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/os/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">#released updates</span><br><span class="line">[updates]</span><br><span class="line">name=CentOS-$releasever - Updates</span><br><span class="line"># mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=updates</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/updates/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">#additional packages that may be useful</span><br><span class="line">[extras]</span><br><span class="line">name=CentOS-$releasever - Extras</span><br><span class="line"># mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=extras</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/extras/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">#additional packages that extend functionality of existing packages</span><br><span class="line">[centosplus]</span><br><span class="line">name=CentOS-$releasever - Plus</span><br><span class="line"># mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=centosplus</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/centosplus/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/centos.add.port/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/05/centos.add.port/" class="post-title-link" itemprop="url">centos7以上添加端口</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>先查看firewalld是否开启</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl status firewalld</span><br></pre></td></tr></table></figure>
+            <ul>
+<li><p>复杂的命令<br><code>$ date -d &quot;$(awk -F. &#39;{print $1}&#39; /proc/uptime) second ago&quot; +&quot;%Y-%m-%d %H:%M:%S&quot;</code>  </p>
 </li>
-<li><p>要是没有开启则开启</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl start firewalld</span><br></pre></td></tr></table></figure>
+<li><p>简单的命令<br>执行<code>top</code>，左上角就是开机时间</p>
 </li>
-<li><p>假设添加8000端口</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd --permanent --add-port=8000/tcp</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启firewalld</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl restart firewalld</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看是否正确开启了端口</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd --query-port=8000/tcp</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>firewalld开机自启</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl <span class="built_in">enable</span> firewalld</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/c.type/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/05/c.type/" class="post-title-link" itemprop="url">short与long是限定符，不是基本数据类型</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>c语言只提供了几种基本数据类型</p>
-<ul>
-<li>char</li>
-<li>int</li>
-<li>float</li>
-<li>double</li>
 </ul>
-<p>而short，long为限定符，用来限定整型,<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">short</span> <span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">int</span> b;</span><br></pre></td></tr></table></figure></p>
-<p>我们平常只是出于习惯把int给省略了。</p>
 
           
         
@@ -1059,7 +640,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/buffer.cache/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/24/valgrind/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -1079,7 +660,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/buffer.cache/" class="post-title-link" itemprop="url">Cache和Buffer的区别是什么</a>
+                <a href="/2017/05/24/valgrind/" class="post-title-link" itemprop="url">valgrind命令</a>
               
             
           </h1>
@@ -1104,9 +685,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-05-24 17:05:14" itemprop="dateCreated datePublished" datetime="2017-05-24T17:05:14+08:00">2017-05-24</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:07:36" itemprop="dateModified" datetime="2019-05-06T15:07:36+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -1141,12 +738,831 @@
       
         
           
-            <h1 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h1><hr>
-<p>简单说，Buffer的核心作用是用来缓冲，缓和冲击。比如你每秒要写100次硬盘，对系统冲击很大，浪费了大量时间在忙着处理开始写和结束写这两件事嘛。用个buffer暂存起来，变成每10秒写一次硬盘，对系统的冲击就很小，写入效率高了，日子过得爽了。极大缓和了冲击。</p>
-<h1 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h1><hr>
-<p>Cache的核心作用是加快取用的速度。比如你一个很复杂的计算做完了，下次还要用结果，就把结果放手边一个好拿的地方存着，下次不用再算了。加快了数据取用的速度。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><hr>
-<p>所以，如果你注意关心过存储系统的话，你会发现硬盘的读写缓冲/缓存名称是不一样的，叫write-buffer和read-cache。很明显地说出了两者的区别。</p>
+            <p><code>$ valgrind --leak-check=full  --show-reachable=yes  --log-file=bump.log ./bump</code></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/20/nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/05/20/nginx/" class="post-title-link" itemprop="url">nginx相关的一些命令</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-05-20 14:00:25" itemprop="dateCreated datePublished" datetime="2017-05-20T14:00:25+08:00">2017-05-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:07:14" itemprop="dateModified" datetime="2019-05-06T15:07:14+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>检查nginx的配置<br><code>$ nginx -t</code>  </p>
+</li>
+<li><p>启动nginx<br><code>$ nginx  -c /usr/local/nginx/conf/nginx.conf</code><br><strong>conf位置得自己找找</strong>  </p>
+</li>
+<li><p>重启nginx<br><code>$ nginx  -s reload</code>  </p>
+</li>
+<li><p>启动cgi<br><code>$ spawn-fcgi -a 127.0.0.1 -p 9002 -C 25 -f /home/zhengdongtian/CLionProjects/Bump/cmake-build-debug/Bump</code><br><strong>9002是对应的conf中的端口</strong></p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/19/selinux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/05/19/selinux/" class="post-title-link" itemprop="url">关闭selinux</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-05-19 22:00:10" itemprop="dateCreated datePublished" datetime="2017-05-19T22:00:10+08:00">2017-05-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:06:46" itemprop="dateModified" datetime="2019-05-06T15:06:46+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>永久关闭selinux<br>将<code>/etc/sysconfig/selinux</code>和<code>/etc/selinux/config</code>中的<code>SELINUX=enforcing</code>改为<code>SELINUX=disabled</code>  </p>
+</li>
+<li><p>临时关闭selinux<br><code>$ setenforce 0</code></p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/19/local.repo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/05/19/local.repo/" class="post-title-link" itemprop="url">创建本地yum源</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-05-19 21:30:56" itemprop="dateCreated datePublished" datetime="2017-05-19T21:30:56+08:00">2017-05-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:06:27" itemprop="dateModified" datetime="2019-05-06T15:06:27+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在没有网络，但是拥有系统光盘或者系统u盘的情况下，可以创建本地yum源来安装一些软件。</p>
+<p>以centos为例： </p>
+<ul>
+<li>挂载光盘或u盘  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p /yum/system</span><br><span class="line">$ mount  /dev/hdc  /yum/system</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>上面的<code>/dev/hdc</code>是插入光盘或者u盘后的路径，通过<code>disk -l</code>查看</strong>  </p>
+<ul>
+<li>创建local.repo，并添加内容，相关内容如下  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/yum.repos.d/local.repo</span><br><span class="line">[base] </span><br><span class="line">name=<span class="built_in">local</span></span><br><span class="line">baseurl=file:///yum/system</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/19/ld.so.conf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/05/19/ld.so.conf/" class="post-title-link" itemprop="url">向环境中添加动态库路径</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-05-19 21:15:20" itemprop="dateCreated datePublished" datetime="2017-05-19T21:15:20+08:00">2017-05-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:05:52" itemprop="dateModified" datetime="2019-05-06T15:05:52+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>如果想改变<code>LD_LIBRARY_PATH</code>的值，如下操作：  </p>
+<ul>
+<li>在<code>/etc/ld.so.conf</code>中添加你的path  </li>
+<li>执行<code>ldconfig</code></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/swap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/04/30/swap/" class="post-title-link" itemprop="url">增加swap大小</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-04-30 12:05:02" itemprop="dateCreated datePublished" datetime="2017-04-30T12:05:02+08:00">2017-04-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 14:59:11" itemprop="dateModified" datetime="2019-05-06T14:59:11+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>增加swap大小, 30G 左右</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ dd <span class="keyword">if</span>=/dev/zero of=/public/swap bs=1024 count=30720000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置交换文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkswap /public/swap</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>立即激活启用交换分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ swapon /public/swap</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加系统引导时自启动运行</p>
+<ol>
+<li><p>打开/etc/fstab</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/fstab</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将光标移动至最后一行按o键（意思是在光标行的下面添加一行）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/public/swap               swap                    swap    defaults        0 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>退出保存，先按退出键，在敲<code>:wq</code>，最后回车</p>
+</li>
+</ol>
+</li>
+</ul>
 
           
         
@@ -1236,7 +1652,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

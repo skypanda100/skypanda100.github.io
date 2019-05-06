@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/linux.vim/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/linux.remove.file/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -345,7 +345,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/linux.vim/" class="post-title-link" itemprop="url">linux下使用vim修改jar包内文件内容</a>
+                <a href="/2017/08/30/linux.remove.file/" class="post-title-link" itemprop="url">linux快速删除文件</a>
               
             
           </h1>
@@ -370,9 +370,516 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-08-30 10:30:05" itemprop="dateCreated datePublished" datetime="2017-08-30T10:30:05+08:00">2017-08-30</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:12:38" itemprop="dateModified" datetime="2019-05-06T15:12:38+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>使用rsync命令。<br>这也是我被网上的一些资料坑的地方。</p>
+<p>坑的过程如下：</p>
+<p>第一次使用的命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rsync --delete-before -a -H -v /root/<span class="built_in">test</span> ./bak</span><br></pre></td></tr></table></figure></p>
+<p>其中，bak为要删除的目录，结果执行后，发现./bak目录下的文件没有删除，反而还将/root/test的空目录复制了过来。<br>后来，多次验证下，才发现应该这么写：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rsync --delete-before -a -H -v /root/<span class="built_in">test</span>/ ./bak</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/05/buffer.cache/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/08/05/buffer.cache/" class="post-title-link" itemprop="url">Cache和Buffer的区别是什么</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-08-05 11:00:05" itemprop="dateCreated datePublished" datetime="2017-08-05T11:00:05+08:00">2017-08-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:12:12" itemprop="dateModified" datetime="2019-05-06T15:12:12+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h1><hr>
+<p>简单说，Buffer的核心作用是用来缓冲，缓和冲击。比如你每秒要写100次硬盘，对系统冲击很大，浪费了大量时间在忙着处理开始写和结束写这两件事嘛。用个buffer暂存起来，变成每10秒写一次硬盘，对系统的冲击就很小，写入效率高了，日子过得爽了。极大缓和了冲击。</p>
+<h1 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h1><hr>
+<p>Cache的核心作用是加快取用的速度。比如你一个很复杂的计算做完了，下次还要用结果，就把结果放手边一个好拿的地方存着，下次不用再算了。加快了数据取用的速度。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><hr>
+<p>所以，如果你注意关心过存储系统的话，你会发现硬盘的读写缓冲/缓存名称是不一样的，叫write-buffer和read-cache。很明显地说出了两者的区别。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/centos.add.port/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/08/02/centos.add.port/" class="post-title-link" itemprop="url">centos7以上添加端口</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-08-02 10:26:31" itemprop="dateCreated datePublished" datetime="2017-08-02T10:26:31+08:00">2017-08-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:11:54" itemprop="dateModified" datetime="2019-05-06T15:11:54+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>先查看firewalld是否开启</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl status firewalld</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>要是没有开启则开启</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl start firewalld</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>假设添加8000端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd --permanent --add-port=8000/tcp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启firewalld</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl restart firewalld</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看是否正确开启了端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd --query-port=8000/tcp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>firewalld开机自启</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl <span class="built_in">enable</span> firewalld</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/01/linux.vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/08/01/linux.vim/" class="post-title-link" itemprop="url">linux下使用vim修改jar包内文件内容</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-08-01 23:25:11" itemprop="dateCreated datePublished" datetime="2017-08-01T23:25:11+08:00">2017-08-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:11:31" itemprop="dateModified" datetime="2019-05-06T15:11:31+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -476,7 +983,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/linux.umask/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/14/docker.php.nginx.postgresql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -496,7 +1003,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/linux.umask/" class="post-title-link" itemprop="url">linux创建目录或文件的默认权限</a>
+                <a href="/2017/07/14/docker.php.nginx.postgresql/" class="post-title-link" itemprop="url">docker + php + nginx + postgresql</a>
               
             
           </h1>
@@ -521,9 +1028,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-07-14 16:52:01" itemprop="dateCreated datePublished" datetime="2017-07-14T16:52:01+08:00">2017-07-14</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:11:10" itemprop="dateModified" datetime="2019-05-06T15:11:10+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -558,63 +1081,18 @@
       
         
           
-            <h2 id="我们创建文件的默认权限是怎么来的？"><a href="#我们创建文件的默认权限是怎么来的？" class="headerlink" title="我们创建文件的默认权限是怎么来的？"></a>我们创建文件的默认权限是怎么来的？</h2><p>当我们登录系统之后创建一个文件总是有一个默认权限的，那么这个权限是怎么来的呢？这就是umask干的事情。umask设置了用户创建文件的默认权限，它与chmod的效果刚好相反，umask设置的是权限“补码”，而chmod设置的是文件权限码。</p>
-<h2 id="如何改变这个默认权限呢？"><a href="#如何改变这个默认权限呢？" class="headerlink" title="如何改变这个默认权限呢？ "></a>如何改变这个默认权限呢？ </h2><p>一般在/etc/profile、$ [HOME]/.bash_profile或$[HOME]/.profile中设置umask值。</p>
-<h2 id="如何计算umask值？"><a href="#如何计算umask值？" class="headerlink" title="如何计算umask值？"></a>如何计算umask值？</h2><p>umask命令允许你设定文件创建时的缺省模式，对应每一类用户(文件属主、同组用户、其他用户)存在一个相应的umask值中的数字。对于文件来说，这一数字的最大值分别是6。系统不允许你在创建一个文本文件时就赋予它执行权限，必须在创建后用chmod命令增加这一权限。目录则允许设置执行权限，这样针对目录来说，umask中各个数字最大可以到7。</p>
-<p>该命令的一般形式为：umask nnn<br>其中nnn为umask置000 - 777</p>
-<p>我们只要记住umask是从权限中“拿走”相应的位即可。下表是umask值与权限的对照表：</p>
-<table>
-<thead>
-<tr>
-<th>umask</th>
-<th>file</th>
-<th>dir</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>6</td>
-<td>7</td>
-</tr>
-<tr>
-<td>1</td>
-<td>6</td>
-<td>6</td>
-</tr>
-<tr>
-<td>2</td>
-<td>4</td>
-<td>5</td>
-</tr>
-<tr>
-<td>3</td>
-<td>4</td>
-<td>4</td>
-</tr>
-<tr>
-<td>4</td>
-<td>2</td>
-<td>3</td>
-</tr>
-<tr>
-<td>5</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>6</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>7</td>
-<td>0</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-<p>如：umask值为022，则默认目录权限为755，默认文件权限为644。</p>
+            <ol>
+<li><p>启动容器  </p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --name gg.php -p 2120:2120 -p 2121:2121 -p 2123:2123 -d \</span><br><span class="line">-v /volume1/homes/ggzdttt/app/php:/var/www/html \</span><br><span class="line">php:7.1-fpm</span><br></pre></td></tr></table></figure>
+<p> 如果步骤2和3都成功后执行下面的命令(记得将时间更改为北京时) </p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it gg.php /bin/bash</span><br><span class="line">$ cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">$ php /var/www/html/gzt/server/other/serial/realtime/start.php start -d</span><br><span class="line">$ <span class="built_in">exit</span></span><br><span class="line"></span><br><span class="line">$ docker run --name gg.nginx -p 8765:80 -d \</span><br><span class="line">-v /volume1/homes/ggzdttt/app/php:/usr/share/nginx/html \</span><br><span class="line">-v /volume1/homes/ggzdttt/nginx/conf.d:/etc/nginx/conf.d \</span><br><span class="line">--link gg.php:php \</span><br><span class="line">nginx</span><br><span class="line"></span><br><span class="line">$ docker <span class="built_in">exec</span> -it gg.nginx /bin/bash</span><br><span class="line">$ cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">$ <span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装php关于postgresql数据库的依赖  </p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it gg.php /bin/bash</span><br><span class="line">$ apt-get update</span><br><span class="line">$ apt-get install -y libpq-dev</span><br><span class="line">$ /usr/<span class="built_in">local</span>/bin/docker-php-ext-configure pgsql</span><br><span class="line">$ /usr/<span class="built_in">local</span>/bin/docker-php-ext-install pgsql</span><br><span class="line">$ <span class="built_in">exit</span></span><br><span class="line">$ docker restart gg.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装workerman依赖  </p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it gg.php /bin/bash</span><br><span class="line">$ apt-get install -y wget</span><br><span class="line">$ <span class="comment">#执行`php -v`确定php版本，然后到http://php.net/releases/查找相应版本的php</span></span><br><span class="line">$ wget http://php.net/distributions/php-7.1.4.tar.gz</span><br><span class="line">$ tar zxvf php-7.1.4.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> php-7.1.4/ext/pcntl/</span><br><span class="line">$ phpize</span><br><span class="line">$ ./configure</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br><span class="line">$ <span class="comment">#通过运行 php --ini查找php.ini文件位置，然后在文件中添加extension=pcntl.so</span></span><br><span class="line">$ apt-get install -y vim</span><br><span class="line">$ vim /usr/<span class="built_in">local</span>/etc/php/conf.d/docker-php-ext-pcntl.ini</span><br><span class="line">$ <span class="comment">#在文件中添加extension=pcntl.so，最后保存退出</span></span><br><span class="line">$ php /var/www/html/gzt/server/other/serial/realtime/start.php start -d</span><br><span class="line">$ <span class="built_in">exit</span></span><br><span class="line">$ docker restart gg.php</span><br></pre></td></tr></table></figure></li>
+</ol>
 
           
         
@@ -671,7 +1149,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/linux.remove.file/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/node.npm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -691,7 +1169,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/linux.remove.file/" class="post-title-link" itemprop="url">linux快速删除文件</a>
+                <a href="/2017/07/12/node.npm/" class="post-title-link" itemprop="url">npm更换源</a>
               
             
           </h1>
@@ -716,9 +1194,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-07-12 18:00:06" itemprop="dateCreated datePublished" datetime="2017-07-12T18:00:06+08:00">2017-07-12</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:10:52" itemprop="dateModified" datetime="2019-05-06T15:10:52+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -753,10 +1247,22 @@
       
         
           
-            <p>使用rsync命令。<br>这也是我被网上的一些资料坑的地方。</p>
-<p>坑的过程如下：</p>
-<p>第一次使用的命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rsync --delete-before -a -H -v /root/<span class="built_in">test</span> ./bak</span><br></pre></td></tr></table></figure></p>
-<p>其中，bak为要删除的目录，结果执行后，发现./bak目录下的文件没有删除，反而还将/root/test的空目录复制了过来。<br>后来，多次验证下，才发现应该这么写：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rsync --delete-before -a -H -v /root/<span class="built_in">test</span>/ ./bak</span><br></pre></td></tr></table></figure></p>
+            <p>有很多方法来配置npm的registry地址，下面根据不同情境列出几种比较常用的方法。<br>以淘宝npm 镜像举例： </p>
+<ol>
+<li><p>临时使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm --registry https://registry.npm.taobao.org install express</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>持久使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>配置后可通过下面方式来验证是否成功<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config get registry</span><br></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm info express</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>通过cnpm使用，这也是我自己常使用的 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><a href="http://www.jianshu.com/p/0deb70e6f395" target="_blank" rel="noopener">http://www.jianshu.com/p/0deb70e6f395</a></p>
 
           
         
@@ -813,7 +1319,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/linux.pip/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/07/linux.pip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -833,7 +1339,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/linux.pip/" class="post-title-link" itemprop="url">Linux Shell 1>/dev/null 2>&1 含义</a>
+                <a href="/2017/07/07/linux.pip/" class="post-title-link" itemprop="url">Linux Shell 1>/dev/null 2>&1 含义</a>
               
             
           </h1>
@@ -858,9 +1364,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-07-07 19:28:44" itemprop="dateCreated datePublished" datetime="2017-07-07T19:28:44+08:00">2017-07-07</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:10:24" itemprop="dateModified" datetime="2019-05-06T15:10:24+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -996,7 +1518,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/linux.modify.time/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/23/linux.memory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -1016,7 +1538,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/linux.modify.time/" class="post-title-link" itemprop="url">修改系统时间</a>
+                <a href="/2017/06/23/linux.memory/" class="post-title-link" itemprop="url">linux内存分析</a>
               
             
           </h1>
@@ -1041,157 +1563,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-06-23 09:50:24" itemprop="dateCreated datePublished" datetime="2017-06-23T09:50:24+08:00">2017-06-23</time>
             
 
             
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>修改时区</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>看看时间是否正确若不正确就按如下操作</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ date &#123;查看目前本地的时间&#125;</span><br><span class="line">$ hwclock --show &#123;查看硬件的时间&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果硬件时间和系统时间不同，那就对硬件的时间进行修改</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="comment">#设置硬件时间为17年4月17日14点44分15秒</span></span><br><span class="line">$ hwclock --<span class="built_in">set</span> --date <span class="string">'2017-04-17 14:44:15'</span></span><br><span class="line">$ <span class="comment">#设置系统时间和硬件时间同步</span></span><br><span class="line">$ hwclock --hctosys</span><br><span class="line">$ <span class="comment">#保存时钟</span></span><br><span class="line">$ clock -w</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/linux.memory/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/05/linux.memory/" class="post-title-link" itemprop="url">linux内存分析</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
 
               
                 
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:09:55" itemprop="dateModified" datetime="2019-05-06T15:09:55+08:00">2019-05-06</time>
               
-
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
-            
-
             
           </span>
 
@@ -1290,7 +1680,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/linux.change.time/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/22/nohup/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -1310,7 +1700,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/linux.change.time/" class="post-title-link" itemprop="url">修改linux系统时间而不用重启</a>
+                <a href="/2017/06/22/nohup/" class="post-title-link" itemprop="url">后台运行</a>
               
             
           </h1>
@@ -1335,9 +1725,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-06-22 15:35:12" itemprop="dateCreated datePublished" datetime="2017-06-22T15:35:12+08:00">2017-06-22</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:09:34" itemprop="dateModified" datetime="2019-05-06T15:09:34+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -1372,29 +1778,15 @@
       
         
           
-            <p><strong>查看时间是否正确，若不正确再修改</strong></p>
-<ul>
-<li><p>查看目前本地的时间  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date</span><br></pre></td></tr></table></figure>
+            <ul>
+<li><p><code>$ java -jar xx.jar</code><br>当前ssh窗口被锁定，可按CTRL + C打断程序运行，或直接关闭窗口，程序退出。  </p>
 </li>
-<li><p>查看硬件的时间  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hwclock --show</span><br></pre></td></tr></table></figure>
+<li><p><code>$ java -jar xx.jar &amp;</code><br>窗口不锁定，&amp;代表在后台运行,当前ssh窗口不被锁定，但是当窗口关闭时，程序中止运行。  </p>
+</li>
+<li><p><code>$ nohup java -jar xx.jar &amp;</code><br>窗口不锁定，窗口关闭时，程序仍然运行，nohup意思是不挂断运行命令,当账户退出或终端关闭时,程序仍然运行。<br>当用nohup命令执行作业时，缺省情况下该作业的所有输出被重定向到nohup.out的文件中，除非另外指定了输出文件。<br><code>$ nohup java -jar xx.jar &gt; temp.log &amp;</code></p>
 </li>
 </ul>
-<p><strong>如果硬件时间和系统时间不同，那就对硬件的时间进行修改</strong></p>
-<ul>
-<li><p>修改时区  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置硬件时间为14年12月15日15点15分15秒  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hwclock --set --date &apos;2017-04-17 14:44:15&apos;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置系统时间和硬件时间同步  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hwclock --hctosys</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>保存时钟  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clock -w</span><br></pre></td></tr></table></figure></li>
-</ul>
+<p>可通过<code>jobs</code>命令查看后台运行任务，执行<code>jobs</code>命令后，就会列出所有后台执行的作业，并且每个作业前面都有个编号。<br>如果想将某个作业调回前台控制，只需要fg + 编号即可。</p>
 
           
         
@@ -1451,7 +1843,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/ld.so.conf/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/mount.ftp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -1471,7 +1863,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/05/ld.so.conf/" class="post-title-link" itemprop="url">向环境中添加动态库路径</a>
+                <a href="/2017/06/15/mount.ftp/" class="post-title-link" itemprop="url">centos挂载ftp目录</a>
               
             
           </h1>
@@ -1496,9 +1888,25 @@
                 
               
 
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
+              <time title="创建时间：2017-06-15 13:25:25" itemprop="dateCreated datePublished" datetime="2017-06-15T13:25:25+08:00">2017-06-15</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:08:57" itemprop="dateModified" datetime="2019-05-06T15:08:57+08:00">2019-05-06</time>
+              
             
           </span>
 
@@ -1533,310 +1941,17 @@
       
         
           
-            <p>如果想改变<code>LD_LIBRARY_PATH</code>的值，如下操作：  </p>
-<ul>
-<li>在<code>/etc/ld.so.conf</code>中添加你的path  </li>
-<li>执行<code>ldconfig</code></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/io.multiplexing/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/05/io.multiplexing/" class="post-title-link" itemprop="url">IO多路复用是什么意思</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>假设你是一个机场的空管， 你需要管理到你机场的所有的航线， 包括进港，出港， 有些航班需要放到停机坪等待，有些航班需要去登机口接乘客。<br>你会怎么做?<br>最简单的做法，就是你去招一大批空管员，然后每人盯一架飞机， 从进港，接客，排位，出港，航线监控，直至交接给下一个空港，全程监控。<br>那么问题就来了：</p>
-<ul>
-<li>很快你就发现空管塔里面聚集起来一大票的空管员，交通稍微繁忙一点，新的空管员就已经挤不进来了。</li>
-<li>空管员之间需要协调，屋子里面就1, 2个人的时候还好，几十号人以后 ，基本上就成菜市场了。</li>
-<li>空管员经常需要更新一些公用的东西，比如起飞显示屏，比如下一个小时后的出港排期，最后你会很惊奇的发现，每个人的时间最后都花在了抢这些资源上。 </li>
-</ul>
-<p>现实上我们的空管同时管几十架飞机稀松平常的事情， 他们怎么做的呢？<br>他们用这个东西<br><img src="/image/io_multiplexing.jpg" alt="空管"><br>这个东西叫flight progress strip.每一个块代表一个航班，不同的槽代表不同的状态，然后一个空管员可以管理一组这样的块（一组航班），而他的工作，就是在航班信息有新的更新的时候，把对应的块放到不同的槽子里面。<br>这个东西现在还没有淘汰哦，只是变成电子的了而已。<br>是不是觉得一下子效率高了很多，一个空管塔里可以调度的航线可以是前一种方法的几倍到几十倍。<br>如果你把每一个航线当成一个Sock(I/O 流), 空管当成你的服务端Sock管理代码的话.<br><strong>第一种方法就是最传统的多进程并发模型 (每进来一个新的I/O流会分配一个新的进程管理。)</strong><br><strong>第二种方法就是I/O多路复用 (单个线程，通过记录跟踪每个I/O流(sock)的状态，来同时管理多个I/O流。)</strong></p>
-<p>其实“I/O多路复用”这个坑爹翻译可能是这个概念在中文里面如此难理解的原因。所谓的I/O多路复用在英文中其实叫 I/O multiplexing. 如果你搜索multiplexing啥意思，基本上都会出这个图：<br><img src="/image/io_multiplexing_1.png" alt="io multiplexing"><br>于是大部分人都直接联想到”一根网线，多个sock复用”这个概念，其实不管你用多进程还是I/O多路复用，网线都只有一根好伐。多个Sock复用一根网线这个功能是在内核＋驱动层实现的。</p>
-<p><strong>重要的事情再说一遍： I/O multiplexing 这里面的 multiplexing 指的其实是在单个线程通过记录跟踪每一个Sock(I/O流)的状态(对应空管塔里面的Fight progress strip槽)来同时管理多个I/O流.</strong>发明它的原因，是尽量多的提高服务器的吞吐能力。</p>
-<p>是不是听起来好拗口，看个图就懂了.<br><img src="/image/io_multiplexing_2.jpg" alt="io multiplexing"><br>在同一个线程里面， 通过拨开关的方式，来同时传输多个I/O流， (学过EE的人现在可以站出来义正严辞说这个叫“时分复用”了）。</p>
-<p>什么，你还没有搞懂“一个请求到来了，nginx使用epoll接收请求的过程是怎样的”， 多看看这个图就了解了。提醒下，ngnix会有很多链接进来， epoll会把他们都监视起来，然后像拨开关一样，谁有数据就拨向谁，然后调用相应的代码处理。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/fastcgi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/05/fastcgi/" class="post-title-link" itemprop="url">nginx + spawn-fastcgi + fcgi</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-05 09:40:08" itemprop="dateCreated datePublished" datetime="2019-05-05T09:40:08+08:00">2019-05-05</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>以下配置应该针对自己环境进行相应改变</strong></p>
-<ul>
-<li><p>nginx<br>安装略过。<br>nginx.conf配置如下，其中request_method配置是为了允许跨域访问：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">location ~ modelsection\.cgi$ &#123;</span><br><span class="line">    if ($request_method = &apos;OPTIONS&apos;) &#123;</span><br><span class="line">      add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</span><br><span class="line">      add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</span><br><span class="line">      add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&apos;;</span><br><span class="line">      #</span><br><span class="line">      # Tell client that this pre-flight info is valid for 20 days</span><br><span class="line">      #</span><br><span class="line">      add_header &apos;Access-Control-Max-Age&apos; 1728000;</span><br><span class="line">      add_header &apos;Content-Type&apos; &apos;text/plain charset=UTF-8&apos;;</span><br><span class="line">      add_header &apos;Content-Length&apos; 0;</span><br><span class="line">      return 204;</span><br><span class="line">    &#125;</span><br><span class="line">    if ($request_method = &apos;POST&apos;) &#123;</span><br><span class="line">      add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</span><br><span class="line">      add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</span><br><span class="line">      add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    if ($request_method = &apos;GET&apos;) &#123;</span><br><span class="line">      add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</span><br><span class="line">      add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</span><br><span class="line">      add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    fastcgi_pass   127.0.0.1:9003;</span><br><span class="line">    fastcgi_index  index.cgi;</span><br><span class="line">    fastcgi_param  SCRIPT_FILENAME  fcgi$fastcgi_script_name;</span><br><span class="line">    include        fastcgi.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <ul>
+<li><p>安装<code>rpmforge-releae</code><br>去<a href="http://www.rpm-find.net/linux/rpm2html/search.php?query=rpmforge-release(x86-64" target="_blank" rel="noopener">某个地址</a>)下载<code>rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm</code>，然后执行命令<code>rpm -Uhv rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm</code>  </p>
 </li>
-<li><p>spawn-fastcgi<br>下载地址<a href="http://www.lighttpd.net/download/spawn-fcgi-1.6.2.tar.gz" target="_blank" rel="noopener">http://www.lighttpd.net/download/spawn-fcgi-1.6.2.tar.gz</a><br>编译略过</p>
+<li><p>安装<code>curlftpfs</code><br><code>$ yum install curlftpfs</code>  </p>
 </li>
-<li><p>fastcgi<br>下载地址<a href="https://download.csdn.net/download/wangkangluo1/3268722" target="_blank" rel="noopener">https://download.csdn.net/download/wangkangluo1/3268722</a><br>编译略过</p>
+<li><p>挂载<br>将挂载后的地址先创建好，例：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p /mod/t639/gmf</span><br><span class="line">$ curlftpfs -o rw,allow_other ftp://nwpdata:123456@10.20.49.99/mod/t639/gmf /mod/t639/gmf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>卸载<br><code>$ fusermount -u /mod/t639/gmf</code></p>
 </li>
 </ul>
-<p><strong>运行命令：<code>spawn-fcgi -a 127.0.0.1 -p 9003 -f ./modelsection</code></strong></p>
-<p><strong><em>参考地址：</em></strong><br><a href="https://blog.csdn.net/ygm_linux/article/details/51261288" target="_blank" rel="noopener">https://blog.csdn.net/ygm_linux/article/details/51261288</a></p>
 
           
         
@@ -1926,7 +2041,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
