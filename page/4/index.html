@@ -325,6 +325,171 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/mount.ftp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/06/15/mount.ftp/" class="post-title-link" itemprop="url">centos挂载ftp目录</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-06-15 13:25:25" itemprop="dateCreated datePublished" datetime="2017-06-15T13:25:25+08:00">2017-06-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:08:57" itemprop="dateModified" datetime="2019-05-06T15:08:57+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>安装<code>rpmforge-releae</code><br>去<a href="http://www.rpm-find.net/linux/rpm2html/search.php?query=rpmforge-release(x86-64" target="_blank" rel="noopener">某个地址</a>)下载<code>rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm</code>，然后执行命令<code>rpm -Uhv rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm</code>  </p>
+</li>
+<li><p>安装<code>curlftpfs</code><br><code>$ yum install curlftpfs</code>  </p>
+</li>
+<li><p>挂载<br>将挂载后的地址先创建好，例：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p /mod/t639/gmf</span><br><span class="line">$ curlftpfs -o rw,allow_other ftp://nwpdata:123456@10.20.49.99/mod/t639/gmf /mod/t639/gmf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>卸载<br><code>$ fusermount -u /mod/t639/gmf</code></p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/08/directory.tar/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1652,7 +1817,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
