@@ -325,6 +325,335 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/15/io.multiplexing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/09/15/io.multiplexing/" class="post-title-link" itemprop="url">IO多路复用是什么意思</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-15 15:06:25" itemprop="dateCreated datePublished" datetime="2017-09-15T15:06:25+08:00">2017-09-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:13:48" itemprop="dateModified" datetime="2019-05-06T15:13:48+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>假设你是一个机场的空管， 你需要管理到你机场的所有的航线， 包括进港，出港， 有些航班需要放到停机坪等待，有些航班需要去登机口接乘客。<br>你会怎么做?<br>最简单的做法，就是你去招一大批空管员，然后每人盯一架飞机， 从进港，接客，排位，出港，航线监控，直至交接给下一个空港，全程监控。<br>那么问题就来了：</p>
+<ul>
+<li>很快你就发现空管塔里面聚集起来一大票的空管员，交通稍微繁忙一点，新的空管员就已经挤不进来了。</li>
+<li>空管员之间需要协调，屋子里面就1, 2个人的时候还好，几十号人以后 ，基本上就成菜市场了。</li>
+<li>空管员经常需要更新一些公用的东西，比如起飞显示屏，比如下一个小时后的出港排期，最后你会很惊奇的发现，每个人的时间最后都花在了抢这些资源上。 </li>
+</ul>
+<p>现实上我们的空管同时管几十架飞机稀松平常的事情， 他们怎么做的呢？<br>他们用这个东西<br><img src="/image/io_multiplexing.jpg" alt="空管"><br>这个东西叫flight progress strip.每一个块代表一个航班，不同的槽代表不同的状态，然后一个空管员可以管理一组这样的块（一组航班），而他的工作，就是在航班信息有新的更新的时候，把对应的块放到不同的槽子里面。<br>这个东西现在还没有淘汰哦，只是变成电子的了而已。<br>是不是觉得一下子效率高了很多，一个空管塔里可以调度的航线可以是前一种方法的几倍到几十倍。<br>如果你把每一个航线当成一个Sock(I/O 流), 空管当成你的服务端Sock管理代码的话.<br><strong>第一种方法就是最传统的多进程并发模型 (每进来一个新的I/O流会分配一个新的进程管理。)</strong><br><strong>第二种方法就是I/O多路复用 (单个线程，通过记录跟踪每个I/O流(sock)的状态，来同时管理多个I/O流。)</strong></p>
+<p>其实“I/O多路复用”这个坑爹翻译可能是这个概念在中文里面如此难理解的原因。所谓的I/O多路复用在英文中其实叫 I/O multiplexing. 如果你搜索multiplexing啥意思，基本上都会出这个图：<br><img src="/image/io_multiplexing_1.png" alt="io multiplexing"><br>于是大部分人都直接联想到”一根网线，多个sock复用”这个概念，其实不管你用多进程还是I/O多路复用，网线都只有一根好伐。多个Sock复用一根网线这个功能是在内核＋驱动层实现的。</p>
+<p><strong>重要的事情再说一遍： I/O multiplexing 这里面的 multiplexing 指的其实是在单个线程通过记录跟踪每一个Sock(I/O流)的状态(对应空管塔里面的Fight progress strip槽)来同时管理多个I/O流.</strong>发明它的原因，是尽量多的提高服务器的吞吐能力。</p>
+<p>是不是听起来好拗口，看个图就懂了.<br><img src="/image/io_multiplexing_2.jpg" alt="io multiplexing"><br>在同一个线程里面， 通过拨开关的方式，来同时传输多个I/O流， (学过EE的人现在可以站出来义正严辞说这个叫“时分复用”了）。</p>
+<p>什么，你还没有搞懂“一个请求到来了，nginx使用epoll接收请求的过程是怎样的”， 多看看这个图就了解了。提醒下，ngnix会有很多链接进来， epoll会把他们都监视起来，然后像拨开关一样，谁有数据就拨向谁，然后调用相应的代码处理。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/14/linux.modify.time/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/09/14/linux.modify.time/" class="post-title-link" itemprop="url">修改系统时间</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-14 12:00:25" itemprop="dateCreated datePublished" datetime="2017-09-14T12:00:25+08:00">2017-09-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:13:21" itemprop="dateModified" datetime="2019-05-06T15:13:21+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>修改时区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>看看时间是否正确若不正确就按如下操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ date &#123;查看目前本地的时间&#125;</span><br><span class="line">$ hwclock --show &#123;查看硬件的时间&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果硬件时间和系统时间不同，那就对硬件的时间进行修改</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="comment">#设置硬件时间为17年4月17日14点44分15秒</span></span><br><span class="line">$ hwclock --<span class="built_in">set</span> --date <span class="string">'2017-04-17 14:44:15'</span></span><br><span class="line">$ <span class="comment">#设置系统时间和硬件时间同步</span></span><br><span class="line">$ hwclock --hctosys</span><br><span class="line">$ <span class="comment">#保存时钟</span></span><br><span class="line">$ clock -w</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/14/c.type/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1666,336 +1995,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/23/linux.memory/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/06/23/linux.memory/" class="post-title-link" itemprop="url">linux内存分析</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-06-23 09:50:24" itemprop="dateCreated datePublished" datetime="2017-06-23T09:50:24+08:00">2017-06-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-06 15:09:55" itemprop="dateModified" datetime="2019-05-06T15:09:55+08:00">2019-05-06</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>分析top命令以及smaps<br>讲得比较浅显易懂<br><a href="http://www.360doc.com/content/16/0412/16/478627_550039413.shtml" target="_blank" rel="noopener">link</a></p>
-</li>
-<li><p>如何设置swap大小<br>根据centos官网介绍可以得出如下公式：M = Amount of RAM in GB, and S = Amount of swap in GB, then If M &lt; 2, S = M *2 Else S = M + 2。而且其最小不应该小于32M(never less than 32 MB.)<br><a href="https://www.centos.org/docs/5/html/5.1/Deployment_Guide/s1-swap-what-is.html" target="_blank" rel="noopener">link</a></p>
-</li>
-<li><p>linux内存介绍以及C与C++内存管理<br>可以关注一下这个人的其他博文<br><a href="http://blog.csdn.net/zwan0518/article/details/9040467" target="_blank" rel="noopener">link</a></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/22/nohup/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/06/22/nohup/" class="post-title-link" itemprop="url">后台运行</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-06-22 15:35:12" itemprop="dateCreated datePublished" datetime="2017-06-22T15:35:12+08:00">2017-06-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-06 15:09:34" itemprop="dateModified" datetime="2019-05-06T15:09:34+08:00">2019-05-06</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p><code>$ java -jar xx.jar</code><br>当前ssh窗口被锁定，可按CTRL + C打断程序运行，或直接关闭窗口，程序退出。  </p>
-</li>
-<li><p><code>$ java -jar xx.jar &amp;</code><br>窗口不锁定，&amp;代表在后台运行,当前ssh窗口不被锁定，但是当窗口关闭时，程序中止运行。  </p>
-</li>
-<li><p><code>$ nohup java -jar xx.jar &amp;</code><br>窗口不锁定，窗口关闭时，程序仍然运行，nohup意思是不挂断运行命令,当账户退出或终端关闭时,程序仍然运行。<br>当用nohup命令执行作业时，缺省情况下该作业的所有输出被重定向到nohup.out的文件中，除非另外指定了输出文件。<br><code>$ nohup java -jar xx.jar &gt; temp.log &amp;</code></p>
-</li>
-</ul>
-<p>可通过<code>jobs</code>命令查看后台运行任务，执行<code>jobs</code>命令后，就会列出所有后台执行的作业，并且每个作业前面都有个编号。<br>如果想将某个作业调回前台控制，只需要fg + 编号即可。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2039,7 +2043,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
