@@ -325,6 +325,217 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/15/linux.umask/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="呐喊">
+      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
+      <meta itemprop="image" content="/images/skypanda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笔记栈">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/09/15/linux.umask/" class="post-title-link" itemprop="url">linux创建目录或文件的默认权限</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-15 17:02:05" itemprop="dateCreated datePublished" datetime="2017-09-15T17:02:05+08:00">2017-09-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 15:14:04" itemprop="dateModified" datetime="2019-05-06T15:14:04+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="我们创建文件的默认权限是怎么来的？"><a href="#我们创建文件的默认权限是怎么来的？" class="headerlink" title="我们创建文件的默认权限是怎么来的？"></a>我们创建文件的默认权限是怎么来的？</h2><p>当我们登录系统之后创建一个文件总是有一个默认权限的，那么这个权限是怎么来的呢？这就是umask干的事情。umask设置了用户创建文件的默认权限，它与chmod的效果刚好相反，umask设置的是权限“补码”，而chmod设置的是文件权限码。</p>
+<h2 id="如何改变这个默认权限呢？"><a href="#如何改变这个默认权限呢？" class="headerlink" title="如何改变这个默认权限呢？ "></a>如何改变这个默认权限呢？ </h2><p>一般在/etc/profile、$ [HOME]/.bash_profile或$[HOME]/.profile中设置umask值。</p>
+<h2 id="如何计算umask值？"><a href="#如何计算umask值？" class="headerlink" title="如何计算umask值？"></a>如何计算umask值？</h2><p>umask命令允许你设定文件创建时的缺省模式，对应每一类用户(文件属主、同组用户、其他用户)存在一个相应的umask值中的数字。对于文件来说，这一数字的最大值分别是6。系统不允许你在创建一个文本文件时就赋予它执行权限，必须在创建后用chmod命令增加这一权限。目录则允许设置执行权限，这样针对目录来说，umask中各个数字最大可以到7。</p>
+<p>该命令的一般形式为：umask nnn<br>其中nnn为umask置000 - 777</p>
+<p>我们只要记住umask是从权限中“拿走”相应的位即可。下表是umask值与权限的对照表：</p>
+<table>
+<thead>
+<tr>
+<th>umask</th>
+<th>file</th>
+<th>dir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<td>1</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>7</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>如：umask值为022，则默认目录权限为755，默认文件权限为644。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/15/io.multiplexing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1796,205 +2007,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/07/linux.pip/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="呐喊">
-      <meta itemprop="description" content="真的勇士敢于直面惨淡的人生">
-      <meta itemprop="image" content="/images/skypanda.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="笔记栈">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/07/07/linux.pip/" class="post-title-link" itemprop="url">Linux Shell 1>/dev/null 2>&1 含义</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-07-07 19:28:44" itemprop="dateCreated datePublished" datetime="2017-07-07T19:28:44+08:00">2017-07-07</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-06 15:10:24" itemprop="dateModified" datetime="2019-05-06T15:10:24+08:00">2019-05-06</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><em>在shell中，每个进程都和三个系统文件 相关联：标准输入stdin，标准输出stdout、标准错误stderr，三个系统文件的文件描述符分别为0，1、2。所以这里2&gt;&amp;1 的意思就是将标准错误也输出到标准输出当中。</em></p>
-<h2 id="shell中可能经常能看到：echo-log-gt-dev-null-2-gt-amp-1"><a href="#shell中可能经常能看到：echo-log-gt-dev-null-2-gt-amp-1" class="headerlink" title="shell中可能经常能看到：echo log &gt; /dev/null 2&gt;&amp;1"></a>shell中可能经常能看到：<code>echo log &gt; /dev/null 2&gt;&amp;1</code></h2><p><code>echo log &gt; /dev/null 2&gt;&amp;1</code>的含义：  </p>
-<ul>
-<li>/dev/null ：代表空设备文件  </li>
-<li>>  ：代表重定向到哪里，例如：<code>echo &quot;123&quot; &gt; /home/123.txt</code>  </li>
-<li>0  ：表示stdin标准输入  </li>
-<li>1  ：表示stdout标准输出，系统默认值是1，所以”&gt;/dev/null”等同于”1&gt;/dev/null”  </li>
-<li>2  ：表示stderr标准错误  </li>
-<li>&amp;  ：表示等同于的意思，2&gt;&amp;1，表示2的输出重定向等同于1  </li>
-</ul>
-<p><code>1 &gt; /dev/null 2&gt;&amp;1</code>语句含义：  </p>
-<ul>
-<li>1 &gt; /dev/null ： 首先表示标准输出重定向到空设备文件，也就是不输出任何信息到终端，说白了就是不显示任何信息。  </li>
-<li>2&gt;&amp;1 ：接着，标准错误输出重定向（等同于）标准输出，因为之前标准输出已经重定向到了空设备文件，所以标准错误输出也重定向到空设备文件。</li>
-</ul>
-<p><code>cmd &gt;a 2&gt;a</code> 和 <code>cmd &gt;a 2&gt;&amp;1</code> 为什么不同？  </p>
-<ul>
-<li><code>cmd &gt;a 2&gt;a</code> ：stdout和stderr都直接送往文件 a ，a文件会被打开两遍，由此导致stdout和stderr互相覆盖。  </li>
-<li><code>cmd &gt;a 2&gt;&amp;1</code> ：stdout直接送往文件a ，stderr是继承了FD1的管道之后，再被送往文件a 。a文件只被打开一遍，就是FD1将其打开。</li>
-<li>以上两者的不同点在于：<br><code>cmd &gt;a 2&gt;a</code> 相当于使用了FD1、FD2两个互相竞争使用文件 a 的管道。<br><code>cmd &gt;a 2&gt;&amp;1</code> 只使用了一个管道FD1，但已经包括了stdout和stderr。<br>从IO效率上来讲，<code>cmd &gt;a 2&gt;&amp;1</code>的效率更高。  </li>
-</ul>
-<h2 id="实例解析"><a href="#实例解析" class="headerlink" title="实例解析"></a>实例解析</h2><p>下面通过一个例子来展示2&gt;&amp;1有什么作用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cat test.sh</span><br><span class="line">t</span><br><span class="line">date</span><br></pre></td></tr></table></figure></p>
-<p>test.sh中包含两个命令，其中t是一个不存在的命令，执行会报错，默认情况下，错误会输出到stderr。date则能正确执行，并且输出时间信息，默认输出到stdout。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ./test.sh &gt; test1.log</span><br><span class="line">./test.sh: line 1: t: <span class="built_in">command</span> not found</span><br><span class="line">$ cat test1.log</span><br><span class="line">Wed Jul 10 21:12:02 CST 2013</span><br></pre></td></tr></table></figure></p>
-<p>可以看到，date的执行结果被重定向到log文件中了，而t无法执行的错误则只打印在屏幕上。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ./test.sh &gt; test2.log 2&gt;&amp;1</span><br><span class="line">$ cat test2.log</span><br><span class="line">./test.sh: line 1: t: <span class="built_in">command</span> not found</span><br><span class="line">Tue Oct 9 20:53:44 CST 2007</span><br></pre></td></tr></table></figure></p>
-<p>这次，stderr和stdout的内容都被重定向到log文件中了。<br>实际上， &gt; 就相当于 1&gt; 也就是重定向标准输出，不包括标准错误。通过2&gt;&amp;1，就将标准错误重定向到标准输出了，那么再使用&gt;重定向就会将标准输出和标准错误信息一同重定向了。如果只想重定向标准错误到文件中，则可以使用2&gt; file。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对于&amp;1 更准确的说应该是文件描述符 1，而1 一般代表的就是STDOUT_FILENO，实际上这个操作就是一个dup2(2)调用.他标准输出到all_result ，然后复制标准输出到文件描述符2(STDERR_FILENO)，其后果就是文件描述符1和2指向同一个文件表项,也可以说错误的输出被合并了，其中0 表示键盘输入 1表示屏幕输出 2表示错误输出，把标准出错重定向到标准输出,然后扔到/DEV/NULL下面去。通俗的说，就是把所有标准输出和标准出错都扔到垃圾桶里面。  </p>
-<p><code>command &gt;out.file 2&gt;&amp;1 &amp;</code>  </p>
-<ul>
-<li>command &gt;out.file是将command的输出重定向到out.file文件，即输出内容不打印到屏幕上，而是输出到out.file文件中。  </li>
-<li>2&gt;&amp;1 是将标准出错重定向到标准输出，这里的标准输出已经重定向到了out.file文件，即将标准出错也输出到out.file文件中。  </li>
-<li>最后一个&amp; ， 是让该命令在后台执行。</li>
-</ul>
-<p>试想2&gt;1代表什么，2与&gt;结合代表错误重定向，而1则代表错误重定向到一个文件1，而不代表标准输出，<br>换成2&gt;&amp;1，&amp;与1结合就代表标准输出了，就变成错误重定向到标准输出.</p>
-<p>可以试试  </p>
-<ul>
-<li><code>ls 2&gt;1</code><br>不会报没有2文件的错误，但会输出一个空的文件1。  </li>
-<li><code>ls xxx 2&gt;1</code><br>没有xxx这个文件的错误输出到了1中。  </li>
-<li><code>ls xxx 2&gt;&amp;1</code><br>不会生成1这个文件了，不过错误跑到标准输出了。  </li>
-<li><code>ls xxx &gt;out.txt 2&gt;&amp;1</code><br>实际上可换成<code>ls xxx 1&gt;out.txt 2&gt;&amp;1</code>，重定向符号&gt;默认是1,错误和输出都传到out.txt了。</li>
-</ul>
-<p>为何2&gt;&amp;1要写在后面？  </p>
-<ul>
-<li><code>command &gt; file 2&gt;&amp;1</code><br>首先是command &gt; file将标准输出重定向到file中， 2&gt;&amp;1 是标准错误拷贝了标准输出的行为，也就是同样被重定向到file中，最终结果就是标准输出和错误都被重定向到file中。   </li>
-<li><code>command 2&gt;&amp;1 &gt;file</code><br>2&gt;&amp;1 标准错误拷贝了标准输出的行为，但此时标准输出还是在终端。&gt;file 后输出才被重定向到file，但标准错误仍然保持在终端。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2043,7 +2055,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">42</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
