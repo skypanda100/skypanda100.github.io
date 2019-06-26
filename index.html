@@ -345,7 +345,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/25/linux.nmap/" class="post-title-link" itemprop="url">未命名</a>
+                <a href="/2019/06/25/linux.nmap/" class="post-title-link" itemprop="url">Nmap</a>
               
             
           </h1>
@@ -370,7 +370,7 @@
                 
               
 
-              <time title="创建时间：2019-06-25 17:30:57 / 修改时间：17:31:42" itemprop="dateCreated datePublished" datetime="2019-06-25T17:30:57+08:00">2019-06-25</time>
+              <time title="创建时间：2019-06-25 17:50:24 / 修改时间：18:10:32" itemprop="dateCreated datePublished" datetime="2019-06-25T17:50:24+08:00">2019-06-25</time>
             
 
             
@@ -411,7 +411,30 @@
       
         
           
-            
+            <h1 id="Nmap"><a href="#Nmap" class="headerlink" title="Nmap"></a>Nmap</h1><p>Nmap 是一款网络扫描和主机侦测的非常有用的工具。</p>
+<ul>
+<li><p>扫描端口，侦测哪些端口是否开放</p>
+<p>open为开放端口；closed为防火墙开放的端口，但是为使用；filtered为防火墙禁止的端口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS -p 12300-12315 -v IP地址</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>扫描端口，侦测某个端口是否开放</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p 12300 IP地址</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>主机发现，Ping扫描</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.1.0/24</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>主机发现，无Ping，慢得很</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -P0 192.168.1.0/24</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><em>ip后的24的含义是子网掩码前24位为1，也就是255.255.255.0</em></p>
+<p><em>更多内容可以参考nmap的manual</em></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><blockquote>
+<p><a href="https://baike.baidu.com/item/nmap/1400075?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/nmap/1400075?fr=aladdin</a></p>
+</blockquote>
+
           
         
       
