@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="笔记栈">
 <meta property="og:description" content="3章 字符串，向量和数组 字符串和字面值的拼接 12345string s1 = &quot;hello&quot;, s2 = &quot;world&quot;;string s4 = s1 + &quot;,&quot;;	// 正确 string s5 = &quot;hello&quot; + &quot;, &quot;;	// 错误：不能把字面值直接相加string s6 = s1 + &quot;, &quot; + &quot;world&quot;;	// 正确string s7 = &quot;hello&quot; + &quot;, &quot;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-09T03:06:55.549Z">
+<meta property="og:updated_time" content="2021-03-10T07:28:13.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c++ primer">
 <meta name="twitter:description" content="3章 字符串，向量和数组 字符串和字面值的拼接 12345string s1 = &quot;hello&quot;, s2 = &quot;world&quot;;string s4 = s1 + &quot;,&quot;;	// 正确 string s5 = &quot;hello&quot; + &quot;, &quot;;	// 错误：不能把字面值直接相加string s6 = s1 + &quot;, &quot; + &quot;world&quot;;	// 正确string s7 = &quot;hello&quot; + &quot;, &quot;">
@@ -385,7 +385,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-03-09 11:06:55" itemprop="dateModified" datetime="2021-03-09T11:06:55+08:00">2021-03-09</time>
+                <time title="修改时间：2021-03-10 15:28:13" itemprop="dateModified" datetime="2021-03-10T15:28:13+08:00">2021-03-10</time>
               
             
           </span>
@@ -570,7 +570,24 @@
 <ul>
 <li><code>class Screen;</code>对于类型Screen来说，在它声明之后定义之前是一个不完全类型（incomplete type），也就是说，此时我们已知Screen是一个类类型，但是不清楚它到底包含哪些成员；</li>
 <li>不完全类型使用场景有限：可以定义指向这种类型的指针或引用，也可以声明（但不能定义）以不完全类型作为参数或者返回类型的函数；</li>
-<li>直到类被定义后数据成员才能被声明成这种类型。换句话说，我们必须完成类的定义，然后编译器才能知道存储该数据成员需要多少空间。因为只有当类全部完成后类才算被定义，所以一个类的成员类型不能是该类自己。然而，一旦一个类的名字出现后，它就被认为是声明过了（但尚未定义），因此类允许包含指向它自身类型的引用或指针。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Link_screen</span> &#123;</span></span><br><span class="line">	Screen window;</span><br><span class="line">	Link_screen *next;</span><br><span class="line">	Link_screen *prev;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li><p>直到类被定义后数据成员才能被声明成这种类型。换句话说，我们必须完成类的定义，然后编译器才能知道存储该数据成员需要多少空间。因为只有当类全部完成后类才算被定义，所以一个类的成员类型不能是该类自己。然而，一旦一个类的名字出现后，它就被认为是声明过了（但尚未定义），因此类允许包含指向它自身类型的引用或指针；</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Link_screen</span> &#123;</span></span><br><span class="line">	Screen window;</span><br><span class="line">	Link_screen *next;</span><br><span class="line">	Link_screen *prev;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>成员初始化顺序，与他们在类定义中的出现顺序一致：第一个成员先被初始化，然后第二个，以此类推；</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> j;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">// 未定义的：i在j之前被初始化</span></span><br><span class="line">	X(<span class="keyword">int</span> val): j(val), i(j) &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol start="6">
+<li>explicit</li>
+</ol>
+<ul>
+<li><p>explicit只能用于直接初始化（阻止隐式转换）；</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Sales_data <span class="title">item1</span><span class="params">(null_book)</span></span>;	<span class="comment">// 正确：直接初始化</span></span><br><span class="line">Sales_data item2 = null_book;	<span class="comment">// 错误：不能将explicit构造函数用于拷贝形式的初始化过程</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只对一个实参的构造函数有效；</p>
+</li>
+<li>需要多个实参的构造函数不能用于执行隐式转换，所以无须将这些构造函数指定为explicit；</li>
+<li>只能在类内声明构造函数时使用explicit，在类外部定义时不应重复；<h1 id="8章-IO库"><a href="#8章-IO库" class="headerlink" title="8章 IO库"></a>8章 IO库</h1></li>
 </ul>
 
       
@@ -723,7 +740,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3章-字符串，向量和数组"><span class="nav-number">1.</span> <span class="nav-text">3章 字符串，向量和数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4章-表达式"><span class="nav-number">2.</span> <span class="nav-text">4章 表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5章-语句"><span class="nav-number">3.</span> <span class="nav-text">5章 语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6章-函数"><span class="nav-number">4.</span> <span class="nav-text">6章 函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7章-类"><span class="nav-number">5.</span> <span class="nav-text">7章 类</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3章-字符串，向量和数组"><span class="nav-number">1.</span> <span class="nav-text">3章 字符串，向量和数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4章-表达式"><span class="nav-number">2.</span> <span class="nav-text">4章 表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5章-语句"><span class="nav-number">3.</span> <span class="nav-text">5章 语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6章-函数"><span class="nav-number">4.</span> <span class="nav-text">6章 函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7章-类"><span class="nav-number">5.</span> <span class="nav-text">7章 类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8章-IO库"><span class="nav-number">6.</span> <span class="nav-text">8章 IO库</span></a></li></ol></div>
             
 
           </div>
