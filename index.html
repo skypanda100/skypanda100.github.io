@@ -2099,7 +2099,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/15/sort.bytes/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/24/vsftpd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="呐喊">
@@ -2119,7 +2119,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/04/15/sort.bytes/" class="post-title-link" itemprop="url">字节序</a>
+                <a href="/2018/10/24/vsftpd/" class="post-title-link" itemprop="url">修改系统时间</a>
               
             
           </h1>
@@ -2144,7 +2144,7 @@
                 
               
 
-              <time title="创建时间：2018-04-15 14:03:05" itemprop="dateCreated datePublished" datetime="2018-04-15T14:03:05+08:00">2018-04-15</time>
+              <time title="创建时间：2018-10-24 17:00:25" itemprop="dateCreated datePublished" datetime="2018-10-24T17:00:25+08:00">2018-10-24</time>
             
 
             
@@ -2161,7 +2161,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-08-06 10:57:12" itemprop="dateModified" datetime="2020-08-06T10:57:12+08:00">2020-08-06</time>
+                <time title="修改时间：2021-03-18 17:13:53" itemprop="dateModified" datetime="2021-03-18T17:13:53+08:00">2021-03-18</time>
               
             
           </span>
@@ -2197,26 +2197,37 @@
       
         
           
-            <p>计算机硬件有两种字节序：</p>
-<ol>
-<li>大端字节序（big endian）<br>高位字节在前，低位字节在后。0x12345678表示为12 34 56 78。</li>
-<li>小端字节序（little endian）<br>低位字节在前，高位字节在后。0x12345678表示为78 56 34 12。</li>
+            <ol>
+<li><p>本地安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum localinstall vsftpd-3.0.2-28.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭SELINUX</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ setenforce 0</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<p>字节序的应用：</p>
-<ol>
-<li>主机字节序（HBO，Host Byte Order）<br>不同的机器HBO不相同，与CPU设计有关，数据的顺序是由cpu决定的,而与操作系统无关。</li>
-<li>网络字节序（NBO，Network Byte Order）<br>为了兼容性统一采取大端字节序，关于为什么会采用大端字节序而不是小端字节序，有这种说法，早期的网络非常不稳定，太容易丢失数据，为了尽量少地丢数据而采用大端字节序，因为即使丢了一部分数据那也只是丢失的低字节的数据^_^</li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改为SELINUX=disabled</span></span><br><span class="line">$ vi /etc/sysconfig/selinux</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>修改vsftpd配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加pasv_min_port=4000，被动模式最小端口</span></span><br><span class="line"><span class="comment">#添加pasv_max_port=4100，被动模式最大端口</span></span><br><span class="line"><span class="comment">#将chroot_local_user=YES的注释去掉，将本地用户限制到自己的主目录</span></span><br><span class="line">$ vi /etc/vsftpd/vsftpd.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ useradd ftp_cmacast</span><br><span class="line"><span class="comment">#密码设置为cmacast112</span></span><br><span class="line">$ passwd ftp_cmacast</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将该用户设置为不可登录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ usermod -s /sbin/nologin ftp_cmacast</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p /mnt/data</span><br><span class="line">$ chmod 777 -R /mnt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置用户的主目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ usermod -d /mnt/data ftp_cmacast</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置防火墙</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl restart firewalld</span><br><span class="line">$ firewall-cmd --permanent --add-port=20-21/tcp</span><br><span class="line">$ firewall-cmd --permanent --add-port=4000-4100/tcp</span><br><span class="line">$ firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动ftp</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl restart vsftpd</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p>网络字节顺序与本地字节顺序之间的转换函数：</p>
-<ol>
-<li>htonl<br>Host to Network Long</li>
-<li>ntohl<br>Network to Host Long</li>
-<li>htons<br>Host to Network Short</li>
-<li>ntohs<br>Network to Host Short</li>
-</ol>
-<p>简单的查看本机字节序的代码：</p>
-<p>第一段是看本机字节序，第二段是看网络字节序也就是小端字节序。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i_num = <span class="number">0x12345678</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"[0]:0x%x\n"</span>, *((<span class="keyword">char</span> *)&amp;i_num + <span class="number">0</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"[1]:0x%x\n"</span>, *((<span class="keyword">char</span> *)&amp;i_num + <span class="number">1</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"[2]:0x%x\n"</span>, *((<span class="keyword">char</span> *)&amp;i_num + <span class="number">2</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"[3]:0x%x\n"</span>, *((<span class="keyword">char</span> *)&amp;i_num + <span class="number">3</span>));</span><br><span class="line"></span><br><span class="line">    i_num = htonl(i_num);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"[0]:0x%x\n"</span>, *((<span class="keyword">char</span> *)&amp;i_num + <span class="number">0</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"[1]:0x%x\n"</span>, *((<span class="keyword">char</span> *)&amp;i_num + <span class="number">1</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"[2]:0x%x\n"</span>, *((<span class="keyword">char</span> *)&amp;i_num + <span class="number">2</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"[3]:0x%x\n"</span>, *((<span class="keyword">char</span> *)&amp;i_num + <span class="number">3</span>));</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -2306,7 +2317,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
